@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Marnbach Teamgenerator V0.5.4</title>
+  <title>Marnbach Teamgenerator V0.5.5</title>
 
 
   <style>
@@ -20,9 +20,13 @@
     }
 
 
+    html,
     body {
 
       margin: 0;
+      padding: 0;
+
+      width: 100%;
 
       font-family:
         Arial,
@@ -35,6 +39,13 @@
     }
 
 
+    body {
+
+      min-height: 100vh;
+
+    }
+
+
     .app {
 
       width: 100%;
@@ -43,7 +54,7 @@
 
       margin: 0 auto;
 
-      padding: 15px;
+      padding: 10px;
 
     }
 
@@ -58,9 +69,9 @@
 
       border-radius: 18px;
 
-      padding: 18px;
+      padding: 14px;
 
-      margin-bottom: 12px;
+      margin-bottom: 10px;
 
       text-align: center;
 
@@ -82,15 +93,17 @@
 
     .header p {
 
-      margin: 5px 0 0;
+      margin: 4px 0 0;
 
       color: #666;
+
+      font-size: 16px;
 
     }
 
 
     /* ==============================
-       KARTEN
+       ALLGEMEINE KARTEN
        ============================== */
 
     .card {
@@ -99,13 +112,24 @@
 
       border-radius: 18px;
 
-      padding: 16px;
+      padding: 14px;
 
-      margin-bottom: 12px;
+      margin-bottom: 10px;
 
       box-shadow:
         0 3px 12px
         rgba(0,0,0,0.10);
+
+    }
+
+
+    /* ==============================
+       SPIELER AKTUALISIEREN
+       ============================== */
+
+    .aktualisieren-card {
+
+      margin-bottom: 10px;
 
     }
 
@@ -122,7 +146,7 @@
 
       border-radius: 12px;
 
-      padding: 15px;
+      padding: 14px;
 
       font-size: 17px;
 
@@ -146,7 +170,7 @@
 
     button:disabled {
 
-      opacity: 0.5;
+      opacity: 0.55;
 
       cursor: default;
 
@@ -159,7 +183,7 @@
 
     .status {
 
-      margin-top: 10px;
+      margin-top: 8px;
 
       text-align: center;
 
@@ -180,12 +204,169 @@
 
 
     /* ==============================
+       FESTE STEUERBOX
+       ============================== */
+
+    .steuerung {
+
+      position: sticky;
+
+      top: 8px;
+
+      z-index: 100;
+
+      background: white;
+
+      border-radius: 18px;
+
+      padding: 14px;
+
+      margin-bottom: 10px;
+
+      box-shadow:
+        0 4px 16px
+        rgba(0,0,0,0.18);
+
+    }
+
+
+    .steuerung-titel {
+
+      margin: 0 0 10px 0;
+
+      font-size: 21px;
+
+      font-weight: bold;
+
+    }
+
+
+    /* ==============================
+       TEAMANZAHL
+       ============================== */
+
+    .team-auswahl {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .team-option {
+
+      flex: 1;
+
+      padding: 12px 5px;
+
+      border-radius: 10px;
+
+      border: 2px solid #ddd;
+
+      background: #f5f5f5;
+
+      color: #222;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+
+    .team-option.aktiv {
+
+      background: #1f6feb;
+
+      border-color: #1f6feb;
+
+      color: white;
+
+    }
+
+
+    /* ==============================
+       SPIELERZÄHLER
+       ============================== */
+
+    .zaehler {
+
+      margin-top: 10px;
+
+      padding: 11px;
+
+      border-radius: 10px;
+
+      background: #f1f1f1;
+
+      text-align: center;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+    }
+
+
+    /* ==============================
+       SPIELERBEREICH
+       ============================== */
+
+    .spieler-card {
+
+      padding: 14px;
+
+    }
+
+
+    .spieler-titel {
+
+      margin: 0;
+
+      font-size: 23px;
+
+    }
+
+
+    /*
+     * Nur dieser Bereich scrollt.
+     */
+
+    .spieler-scroll {
+
+      height: 55vh;
+
+      min-height: 300px;
+
+      max-height: 600px;
+
+      overflow-y: auto;
+
+      overflow-x: hidden;
+
+      margin-top: 10px;
+
+      padding-right: 3px;
+
+      -webkit-overflow-scrolling: touch;
+
+      overscroll-behavior: contain;
+
+    }
+
+
+    /* ==============================
        SPIELER
        ============================== */
 
     .spieler-liste {
 
-      margin-top: 12px;
+      width: 100%;
 
     }
 
@@ -211,6 +392,8 @@
       transition:
         background 0.15s,
         border 0.15s;
+
+      min-height: 49px;
 
     }
 
@@ -245,6 +428,8 @@
 
       cursor: pointer;
 
+      user-select: none;
+
     }
 
 
@@ -276,80 +461,7 @@
 
 
     /* ==============================
-       ZÄHLER
-       ============================== */
-
-    .zaehler {
-
-      text-align: center;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      margin-top: 5px;
-
-    }
-
-
-    /* ==============================
-       TEAMAUSWAHL
-       ============================== */
-
-    .team-auswahl {
-
-      display: flex;
-
-      gap: 8px;
-
-      margin-top: 12px;
-
-    }
-
-
-    .team-option {
-
-      flex: 1;
-
-      padding: 13px 5px;
-
-      border-radius: 10px;
-
-      border: 2px solid #ddd;
-
-      background: #f5f5f5;
-
-      color: #222;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-
-    .team-option.aktiv {
-
-      background: #1f6feb;
-
-      border-color: #1f6feb;
-
-      color: white;
-
-    }
-
-
-    .erstellen {
-
-      margin-top: 15px;
-
-    }
-
-
-    /* ==============================
-       TEAMS
+       TEAMERGEBNIS
        ============================== */
 
     #ergebnisBereich {
@@ -367,7 +479,7 @@
 
       gap: 12px;
 
-      margin-top: 15px;
+      margin-top: 12px;
 
     }
 
@@ -390,6 +502,8 @@
       padding: 12px;
 
       color: white;
+
+      background: #1f6feb;
 
       font-size: 18px;
 
@@ -440,7 +554,7 @@
 
       padding: 12px;
 
-      background: white;
+      background: #f1f1f1;
 
       border-radius: 10px;
 
@@ -461,6 +575,35 @@
 
 
     /* ==============================
+       SCROLLBAR
+       ============================== */
+
+    .spieler-scroll::-webkit-scrollbar {
+
+      width: 7px;
+
+    }
+
+
+    .spieler-scroll::-webkit-scrollbar-track {
+
+      background: #eeeeee;
+
+      border-radius: 10px;
+
+    }
+
+
+    .spieler-scroll::-webkit-scrollbar-thumb {
+
+      background: #bbbbbb;
+
+      border-radius: 10px;
+
+    }
+
+
+    /* ==============================
        MOBILE
        ============================== */
 
@@ -468,7 +611,7 @@
 
       .app {
 
-        padding: 10px;
+        padding: 8px;
 
       }
 
@@ -480,9 +623,30 @@
       }
 
 
+      .header p {
+
+        font-size: 15px;
+
+      }
+
+
+      .steuerung-titel {
+
+        font-size: 20px;
+
+      }
+
+
       .spieler-name {
 
         font-size: 16px;
+
+      }
+
+
+      .spieler-scroll {
+
+        height: 55vh;
 
       }
 
@@ -507,7 +671,7 @@
 
       <h1>⚽ Marnbach</h1>
 
-      <p>Teamgenerator V0.5.4</p>
+      <p>Teamgenerator V0.5.5</p>
 
     </div>
 
@@ -516,7 +680,7 @@
          SPIELER AKTUALISIEREN
          ============================ -->
 
-    <div class="card">
+    <div class="card aktualisieren-card">
 
       <button
         onclick="spielerLaden()"
@@ -536,45 +700,20 @@
 
 
     <!-- ============================
-         SPIELER
+         FESTE STEUERUNG
          ============================ -->
 
     <div
-      id="spielerBereich"
-      class="card"
+      id="steuerung"
+      class="steuerung"
       style="display:none;"
     >
 
-      <h2>Spieler</h2>
+      <div class="steuerung-titel">
 
+        Anzahl Teams
 
-      <div
-        id="zaehler"
-        class="zaehler"
-      >
-        0 Spieler dabei
       </div>
-
-
-      <div
-        id="spielerListe"
-        class="spieler-liste"
-      ></div>
-
-    </div>
-
-
-    <!-- ============================
-         TEAMAUSWAHL
-         ============================ -->
-
-    <div
-      id="teamBereich"
-      class="card"
-      style="display:none;"
-    >
-
-      <h2>Anzahl Teams</h2>
 
 
       <div class="team-auswahl">
@@ -610,11 +749,49 @@
 
       <button
         id="teamsErstellenButton"
-        class="erstellen"
         onclick="teamsErstellen()"
       >
         Teams erstellen
       </button>
+
+
+      <div
+        id="zaehler"
+        class="zaehler"
+      >
+        0 Spieler dabei
+      </div>
+
+    </div>
+
+
+    <!-- ============================
+         SPIELER
+         ============================ -->
+
+    <div
+      id="spielerBereich"
+      class="card spieler-card"
+      style="display:none;"
+    >
+
+      <h2 class="spieler-titel">
+        Spieler
+      </h2>
+
+
+      <!--
+        Eigener Scrollbereich
+      -->
+
+      <div class="spieler-scroll">
+
+        <div
+          id="spielerListe"
+          class="spieler-liste"
+        ></div>
+
+      </div>
 
     </div>
 
@@ -750,7 +927,6 @@
               " Spieler geladen."
             );
 
-
           }
 
           catch (fehler) {
@@ -819,9 +995,9 @@
         );
 
 
-      const teamBereich =
+      const steuerung =
         document.getElementById(
-          "teamBereich"
+          "steuerung"
         );
 
 
@@ -979,7 +1155,7 @@
         "block";
 
 
-      teamBereich.style.display =
+      steuerung.style.display =
         "block";
 
 
@@ -1181,10 +1357,6 @@
       );
 
 
-      /*
-       * JSONP-Callback
-       */
-
       const callbackName =
         "marnbachTeams" +
         Date.now();
@@ -1254,10 +1426,6 @@
         };
 
 
-      /*
-       * URL für den Master
-       */
-
       const idsParameter =
         encodeURIComponent(
           JSON.stringify(
@@ -1292,10 +1460,6 @@
         "&t=" +
         Date.now();
 
-
-      /*
-       * Script laden
-       */
 
       const script =
         document.createElement(
@@ -1380,10 +1544,6 @@
         "";
 
 
-      /*
-       * Teams holen
-       */
-
       const teams =
         Array.isArray(
           daten.teams
@@ -1406,10 +1566,6 @@
 
       }
 
-
-      /*
-       * Teams darstellen
-       */
 
       teams.forEach(
         function(team, index) {
@@ -1434,11 +1590,6 @@
           kopf.className =
             "team-kopf";
 
-
-          /*
-           * Teamname möglichst
-           * flexibel auslesen
-           */
 
           let teamName =
             "";
@@ -1475,10 +1626,6 @@
           kopf.textContent =
             teamName;
 
-
-          /*
-           * Spielerbereich
-           */
 
           const spielerBox =
             document.createElement(
@@ -1538,10 +1685,6 @@
 
           }
 
-
-          /*
-           * Spieler anzeigen
-           */
 
           teamSpieler.forEach(
             function(person) {
@@ -1646,12 +1789,6 @@
           );
 
 
-          /*
-           * Falls die Struktur
-           * anders geliefert wird,
-           * trotzdem etwas anzeigen.
-           */
-
           if (
             teamSpieler.length === 0
           ) {
@@ -1695,10 +1832,6 @@
       );
 
 
-      /*
-       * Statistik
-       */
-
       if (
         daten.statistik
       ) {
@@ -1739,10 +1872,6 @@
       bereich.style.display =
         "block";
 
-
-      /*
-       * Zum Ergebnis scrollen
-       */
 
       setTimeout(
         function() {
