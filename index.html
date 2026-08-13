@@ -1,57 +1,537 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Marnbach Teamgenerator</title>
 
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+
+    * {
+      box-sizing: border-box;
     }
+
+
+    body {
+
+      margin: 0;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background: #f2f2f2;
+
+      color: #222;
+
+    }
+
 
     .app {
-      width: 90%;
-      max-width: 500px;
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+
+      width: 100%;
+
+      max-width: 600px;
+
+      margin: 0 auto;
+
+      padding: 20px;
+
     }
 
-    h1 {
-      margin-bottom: 10px;
+
+    .header {
+
+      background: #ffffff;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      margin-bottom: 15px;
+
+      text-align: center;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.12);
+
     }
+
+
+    .header h1 {
+
+      margin: 0;
+
+      font-size: 28px;
+
+    }
+
+
+    .header p {
+
+      margin: 6px 0 0;
+
+      color: #666;
+
+    }
+
+
+    .card {
+
+      background: #ffffff;
+
+      border-radius: 18px;
+
+      padding: 18px;
+
+      margin-bottom: 15px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.10);
+
+    }
+
+
+    button {
+
+      width: 100%;
+
+      border: none;
+
+      border-radius: 12px;
+
+      padding: 15px;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      background: #1f6feb;
+
+      color: white;
+
+    }
+
+
+    button:active {
+
+      transform: scale(0.98);
+
+    }
+
+
+    .spieler-liste {
+
+      margin-top: 15px;
+
+    }
+
+
+    .spieler {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 12px;
+
+      margin-bottom: 6px;
+
+      border-radius: 10px;
+
+      background: #f5f5f5;
+
+    }
+
+
+    .spieler input {
+
+      width: 25px;
+
+      height: 25px;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .spieler-name {
+
+      flex: 1;
+
+      font-size: 17px;
+
+    }
+
+
+    .notiz {
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      min-width: 30px;
+
+      text-align: center;
+
+    }
+
 
     .status {
-      color: #198754;
-      font-weight: bold;
-      margin-top: 20px;
+
+      margin-top: 12px;
+
+      text-align: center;
+
+      color: #666;
+
+      font-size: 14px;
+
     }
+
+
+    .fehler {
+
+      color: #b00020;
+
+      font-weight: bold;
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="app">
 
-    <h1>⚽ Marnbach</h1>
 
-    <h2>Teamgenerator</h2>
+    <div class="header">
 
-    <p class="status">
-      PWA läuft!
-    </p>
+      <h1>⚽ Marnbach</h1>
+
+      <p>Teamgenerator</p>
+
+    </div>
+
+
+    <div class="card">
+
+      <button
+        onclick="spielerLaden()"
+      >
+        Spieler aktualisieren
+      </button>
+
+      <div
+        id="status"
+        class="status"
+      >
+        Bereit
+      </div>
+
+    </div>
+
+
+    <div
+      id="spielerBereich"
+      class="card"
+      style="display:none;"
+    >
+
+      <h2>Spieler</h2>
+
+      <div
+        id="spielerListe"
+        class="spieler-liste"
+      ></div>
+
+    </div>
+
 
   </div>
 
+
+  <script>
+
+
+    /*
+     * Deine bestehende
+     * Master-Web-App
+     */
+
+    const MASTER_WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
+
+
+    let spieler = [];
+
+
+    /*
+     * Status anzeigen
+     */
+
+    function status(text, fehler = false) {
+
+      const element =
+        document.getElementById(
+          "status"
+        );
+
+      element.textContent = text;
+
+      element.className =
+        fehler
+          ? "status fehler"
+          : "status";
+
+    }
+
+
+    /*
+     * Spieler aus der
+     * Master-Web-App laden.
+     */
+
+    function spielerLaden() {
+
+      status(
+        "Spieler werden geladen..."
+      );
+
+
+      const callbackName =
+        "marnbachSpieler" +
+        Date.now();
+
+
+      window[callbackName] =
+        function(daten) {
+
+          try {
+
+            if (
+              !daten ||
+              !daten.success
+            ) {
+
+              throw new Error(
+                daten?.error ||
+                "Unbekannter Fehler."
+              );
+
+            }
+
+
+            spieler =
+              daten.spieler || [];
+
+
+            spielerAnzeigen();
+
+
+            status(
+              spieler.length +
+              " Spieler geladen."
+            );
+
+
+          }
+
+          catch (fehler) {
+
+            status(
+              "Fehler: " +
+              fehler.message,
+              true
+            );
+
+          }
+
+
+          delete window[callbackName];
+
+        };
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        MASTER_WEB_APP_URL +
+        "?action=spieler" +
+        "&prefix=" +
+        callbackName;
+
+
+      script.onerror =
+        function() {
+
+          status(
+            "Verbindung zur Master-Datei fehlgeschlagen.",
+            true
+          );
+
+          delete window[callbackName];
+
+        };
+
+
+      document
+        .body
+        .appendChild(script);
+
+    }
+
+
+    /*
+     * Spieler anzeigen
+     */
+
+    function spielerAnzeigen() {
+
+      const bereich =
+        document.getElementById(
+          "spielerBereich"
+        );
+
+
+      const liste =
+        document.getElementById(
+          "spielerListe"
+        );
+
+
+      liste.innerHTML = "";
+
+
+      if (
+        spieler.length === 0
+      ) {
+
+        liste.innerHTML =
+          "<p>Keine Spieler gefunden.</p>";
+
+        bereich.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      spieler.forEach(
+        function(s, index) {
+
+
+          const zeile =
+            document.createElement(
+              "label"
+            );
+
+
+          zeile.className =
+            "spieler";
+
+
+          const checkbox =
+            document.createElement(
+              "input"
+            );
+
+
+          checkbox.type =
+            "checkbox";
+
+
+          checkbox.dataset.id =
+            s.id;
+
+
+          const name =
+            document.createElement(
+              "span"
+            );
+
+
+          name.className =
+            "spieler-name";
+
+
+          name.textContent =
+            (
+              s.vorname +
+              " " +
+              s.nachname
+            ).trim();
+
+
+          const notiz =
+            document.createElement(
+              "span"
+            );
+
+
+          notiz.className =
+            "notiz";
+
+
+          notiz.textContent =
+            s.notiz || "";
+
+
+          zeile.appendChild(
+            checkbox
+          );
+
+
+          zeile.appendChild(
+            name
+          );
+
+
+          zeile.appendChild(
+            notiz
+          );
+
+
+          liste.appendChild(
+            zeile
+          );
+
+        }
+      );
+
+
+      bereich.style.display =
+        "block";
+
+    }
+
+
+  </script>
+
+
 </body>
+
 </html>
