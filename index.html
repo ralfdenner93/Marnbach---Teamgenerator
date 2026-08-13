@@ -559,97 +559,93 @@
        SPIELER LADEN
        ============================== */
 
+function spielerLaden() {
 
-    function spielerLaden() {
-
-      status(
-        "Spieler werden geladen..."
-      );
-
-
-      const callbackName =
-        "marnbachSpieler" +
-        Date.now();
+  status(
+    "Spieler werden geladen..."
+  );
 
 
-      window[callbackName] =
-        function(daten) {
+  window.marnbachSpielerCallback =
+    function(daten) {
 
-          try {
+      try {
 
-            if (
-              !daten ||
-              !daten.success
-            ) {
+        if (
+          !daten ||
+          !daten.success
+        ) {
 
-              throw new Error(
-                daten?.error ||
-                "Unbekannter Fehler."
-              );
+          throw new Error(
+            daten?.error ||
+            "Unbekannter Fehler."
+          );
 
-            }
-
-
-            spieler =
-              daten.spieler || [];
+        }
 
 
-            spielerAnzeigen();
+        spieler =
+          daten.spieler || [];
 
 
-            status(
-              spieler.length +
-              " Spieler geladen."
-            );
+        spielerAnzeigen();
 
 
-          }
-
-          catch (fehler) {
-
-            status(
-              "Fehler: " +
-              fehler.message,
-              true
-            );
-
-          }
-
-
-          delete window[callbackName];
-
-        };
-
-
-      const script =
-        document.createElement(
-          "script"
+        status(
+          spieler.length +
+          " Spieler geladen."
         );
 
 
-      script.src =
-        MASTER_WEB_APP_URL +
-        "?action=spielerPWA";
+      }
+      catch (fehler) {
+
+        status(
+          "Fehler: " +
+          fehler.message,
+          true
+        );
+
+      }
 
 
-      script.onerror =
-        function() {
+      delete window.marnbachSpielerCallback;
 
-          status(
-            "Verbindung zur Master-Datei fehlgeschlagen.",
-            true
-          );
-
-          delete window[callbackName];
-
-        };
+    };
 
 
-      document
-        .body
-        .appendChild(script);
+  const script =
+    document.createElement(
+      "script"
+    );
 
-    }
+
+  script.src =
+    MASTER_WEB_APP_URL +
+    "?action=spielerPWA" +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror =
+    function() {
+
+      status(
+        "Verbindung zur Master-Datei fehlgeschlagen.",
+        true
+      );
+
+      delete window.marnbachSpielerCallback;
+
+    };
+
+
+  document
+    .body
+    .appendChild(script);
+
+}
+    
 
 
     /* ==============================
