@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Marnbach Teamgenerator V0.5.3</title>
+  <title>Marnbach Teamgenerator V0.5.4</title>
 
 
   <style>
@@ -349,6 +349,118 @@
 
 
     /* ==============================
+       TEAMS
+       ============================== */
+
+    #ergebnisBereich {
+
+      display: none;
+
+    }
+
+
+    .teams-container {
+
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 12px;
+
+      margin-top: 15px;
+
+    }
+
+
+    .team {
+
+      border-radius: 14px;
+
+      overflow: hidden;
+
+      background: #f5f5f5;
+
+      border: 1px solid #ddd;
+
+    }
+
+
+    .team-kopf {
+
+      padding: 12px;
+
+      color: white;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      text-align: center;
+
+    }
+
+
+    .team-spieler {
+
+      padding: 8px 12px 12px;
+
+    }
+
+
+    .team-spieler-zeile {
+
+      padding: 8px 4px;
+
+      border-bottom: 1px solid #ddd;
+
+      font-size: 16px;
+
+    }
+
+
+    .team-spieler-zeile:last-child {
+
+      border-bottom: none;
+
+    }
+
+
+    .team-notiz {
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      margin-left: 5px;
+
+    }
+
+
+    .team-statistik {
+
+      padding: 12px;
+
+      background: white;
+
+      border-radius: 10px;
+
+      margin-top: 12px;
+
+      font-size: 14px;
+
+      color: #555;
+
+    }
+
+
+    .neu-erstellen {
+
+      margin-top: 12px;
+
+    }
+
+
+    /* ==============================
        MOBILE
        ============================== */
 
@@ -395,7 +507,7 @@
 
       <h1>⚽ Marnbach</h1>
 
-      <p>Teamgenerator V0.5.3</p>
+      <p>Teamgenerator V0.5.4</p>
 
     </div>
 
@@ -453,7 +565,7 @@
 
 
     <!-- ============================
-         TEAMANZAHL
+         TEAMAUSWAHL
          ============================ -->
 
     <div
@@ -497,10 +609,46 @@
 
 
       <button
+        id="teamsErstellenButton"
         class="erstellen"
         onclick="teamsErstellen()"
       >
         Teams erstellen
+      </button>
+
+    </div>
+
+
+    <!-- ============================
+         TEAMERGEBNIS
+         ============================ -->
+
+    <div
+      id="ergebnisBereich"
+      class="card"
+    >
+
+      <h2>Teams</h2>
+
+
+      <div
+        id="teamsContainer"
+        class="teams-container"
+      ></div>
+
+
+      <div
+        id="statistik"
+        class="team-statistik"
+        style="display:none;"
+      ></div>
+
+
+      <button
+        class="neu-erstellen"
+        onclick="teamsErstellen()"
+      >
+        Teams neu erstellen
       </button>
 
     </div>
@@ -567,26 +715,10 @@
       );
 
 
-      /*
-       * Genau diese Methode hat
-       * vorher bereits funktioniert.
-       *
-       * Der Master bekommt:
-       *
-       * action=spieler
-       *
-       * und einen individuellen
-       * JSONP-Callback.
-       */
-
       const callbackName =
         "marnbachSpieler" +
         Date.now();
 
-
-      /*
-       * Callback im Browser erzeugen
-       */
 
       window[callbackName] =
         function(daten) {
@@ -632,31 +764,16 @@
           }
 
 
-          /*
-           * Callback wieder entfernen
-           */
-
           delete window[callbackName];
 
         };
 
-
-      /*
-       * Script erzeugen
-       */
 
       const script =
         document.createElement(
           "script"
         );
 
-
-      /*
-       * WICHTIG:
-       *
-       * action=spieler
-       * prefix=unserCallback
-       */
 
       script.src =
         MASTER_WEB_APP_URL +
@@ -668,10 +785,6 @@
         "&t=" +
         Date.now();
 
-
-      /*
-       * Fehler beim Laden
-       */
 
       script.onerror =
         function() {
@@ -718,24 +831,12 @@
         );
 
 
-      /*
-       * Alte Liste löschen
-       */
-
       liste.innerHTML = "";
 
-
-      /*
-       * Spieler durchlaufen
-       */
 
       spieler.forEach(
         function(s) {
 
-
-          /*
-           * Zeile
-           */
 
           const zeile =
             document.createElement(
@@ -746,10 +847,6 @@
           zeile.className =
             "spieler";
 
-
-          /*
-           * Checkbox
-           */
 
           const checkbox =
             document.createElement(
@@ -764,10 +861,6 @@
           checkbox.dataset.id =
             s.id;
 
-
-          /*
-           * Checkbox geändert
-           */
 
           checkbox.addEventListener(
             "change",
@@ -798,10 +891,6 @@
           );
 
 
-          /*
-           * Name
-           */
-
           const name =
             document.createElement(
               "span"
@@ -819,10 +908,6 @@
               s.nachname
             ).trim();
 
-
-          /*
-           * T / T+
-           */
 
           const notiz =
             document.createElement(
@@ -867,10 +952,6 @@
           }
 
 
-          /*
-           * Zeile zusammensetzen
-           */
-
           zeile.appendChild(
             checkbox
           );
@@ -893,10 +974,6 @@
         }
       );
 
-
-      /*
-       * Bereiche anzeigen
-       */
 
       bereich.style.display =
         "block";
@@ -975,10 +1052,10 @@
 
 
     /* ==============================
-       TEAMS ERSTELLEN
+       AUSGEWÄHLTE SPIELER
        ============================== */
 
-    function teamsErstellen() {
+    function ausgewaehlteSpieler() {
 
       const checked =
         document.querySelectorAll(
@@ -986,8 +1063,82 @@
         );
 
 
+      const ids = [];
+
+      const notizen = {};
+
+
+      checked.forEach(
+        function(checkbox) {
+
+          const id =
+            Number(
+              checkbox.dataset.id
+            );
+
+
+          ids.push(id);
+
+
+          const spielerObjekt =
+            spieler.find(
+              function(s) {
+
+                return Number(s.id) === id;
+
+              }
+            );
+
+
+          if (
+            spielerObjekt
+          ) {
+
+            const notiz =
+              String(
+                spielerObjekt.notiz || ""
+              ).trim();
+
+
+            if (
+              notiz === "T" ||
+              notiz === "T+"
+            ) {
+
+              notizen[id] =
+                notiz;
+
+            }
+
+          }
+
+        }
+      );
+
+
+      return {
+
+        ids: ids,
+
+        notizen: notizen
+
+      };
+
+    }
+
+
+    /* ==============================
+       TEAMS ERSTELLEN
+       ============================== */
+
+    function teamsErstellen() {
+
+      const auswahl =
+        ausgewaehlteSpieler();
+
+
       const spielerAnzahl =
-        checked.length;
+        auswahl.ids.length;
 
 
       if (
@@ -1006,16 +1157,607 @@
       }
 
 
+      const button =
+        document.getElementById(
+          "teamsErstellenButton"
+        );
+
+
+      if (
+        button
+      ) {
+
+        button.disabled =
+          true;
+
+        button.textContent =
+          "Teams werden erstellt...";
+
+      }
+
+
+      status(
+        "Teams werden erstellt..."
+      );
+
+
       /*
-       * Echte Team-Erstellung kommt
-       * im nächsten Schritt.
+       * JSONP-Callback
        */
 
-      alert(
-        "Team-Erstellung kommt als nächster Schritt."
+      const callbackName =
+        "marnbachTeams" +
+        Date.now();
+
+
+      window[callbackName] =
+        function(daten) {
+
+          try {
+
+            if (
+              !daten ||
+              daten.success === false
+            ) {
+
+              throw new Error(
+                daten?.error ||
+                "Die Team-Erstellung ist fehlgeschlagen."
+              );
+
+            }
+
+
+            teamsAnzeigen(
+              daten
+            );
+
+
+            status(
+              "Teams erfolgreich erstellt."
+            );
+
+          }
+
+          catch (fehler) {
+
+            status(
+              "Fehler: " +
+              fehler.message,
+              true
+            );
+
+
+            alert(
+              "Fehler beim Erstellen der Teams:\n\n" +
+              fehler.message
+            );
+
+          }
+
+
+          delete window[callbackName];
+
+
+          if (
+            button
+          ) {
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Teams erstellen";
+
+          }
+
+        };
+
+
+      /*
+       * URL für den Master
+       */
+
+      const idsParameter =
+        encodeURIComponent(
+          JSON.stringify(
+            auswahl.ids
+          )
+        );
+
+
+      const notizenParameter =
+        encodeURIComponent(
+          JSON.stringify(
+            auswahl.notizen
+          )
+        );
+
+
+      const url =
+        MASTER_WEB_APP_URL +
+        "?action=teams" +
+        "&ids=" +
+        idsParameter +
+        "&anzahlTeams=" +
+        encodeURIComponent(
+          anzahlTeams
+        ) +
+        "&notizen=" +
+        notizenParameter +
+        "&prefix=" +
+        encodeURIComponent(
+          callbackName
+        ) +
+        "&t=" +
+        Date.now();
+
+
+      /*
+       * Script laden
+       */
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        url;
+
+
+      script.onerror =
+        function() {
+
+          status(
+            "Verbindung zur Team-Erstellung fehlgeschlagen.",
+            true
+          );
+
+
+          alert(
+            "Die Verbindung zur Master-Datei für die Team-Erstellung ist fehlgeschlagen."
+          );
+
+
+          delete window[callbackName];
+
+
+          if (
+            button
+          ) {
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Teams erstellen";
+
+          }
+
+        };
+
+
+      document
+        .body
+        .appendChild(script);
+
+    }
+
+
+    /* ==============================
+       TEAMS ANZEIGEN
+       ============================== */
+
+    function teamsAnzeigen(
+      daten
+    ) {
+
+      const bereich =
+        document.getElementById(
+          "ergebnisBereich"
+        );
+
+
+      const container =
+        document.getElementById(
+          "teamsContainer"
+        );
+
+
+      const statistik =
+        document.getElementById(
+          "statistik"
+        );
+
+
+      container.innerHTML =
+        "";
+
+
+      statistik.innerHTML =
+        "";
+
+
+      /*
+       * Teams holen
+       */
+
+      const teams =
+        Array.isArray(
+          daten.teams
+        )
+          ? daten.teams
+          : [];
+
+
+      if (
+        teams.length === 0
+      ) {
+
+        container.innerHTML =
+          "<p>Der Master hat keine Teams zurückgegeben.</p>";
+
+        bereich.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      /*
+       * Teams darstellen
+       */
+
+      teams.forEach(
+        function(team, index) {
+
+
+          const teamBox =
+            document.createElement(
+              "div"
+            );
+
+
+          teamBox.className =
+            "team";
+
+
+          const kopf =
+            document.createElement(
+              "div"
+            );
+
+
+          kopf.className =
+            "team-kopf";
+
+
+          /*
+           * Teamname möglichst
+           * flexibel auslesen
+           */
+
+          let teamName =
+            "";
+
+
+          if (
+            typeof team === "object"
+          ) {
+
+            teamName =
+              team.name ||
+              team.team ||
+              team.teamName ||
+              (
+                "Team " +
+                String.fromCharCode(
+                  65 + index
+                )
+              );
+
+          }
+
+          else {
+
+            teamName =
+              "Team " +
+              String.fromCharCode(
+                65 + index
+              );
+
+          }
+
+
+          kopf.textContent =
+            teamName;
+
+
+          /*
+           * Spielerbereich
+           */
+
+          const spielerBox =
+            document.createElement(
+              "div"
+            );
+
+
+          spielerBox.className =
+            "team-spieler";
+
+
+          let teamSpieler = [];
+
+
+          if (
+            Array.isArray(team)
+          ) {
+
+            teamSpieler =
+              team;
+
+          }
+
+          else if (
+            team &&
+            Array.isArray(
+              team.spieler
+            )
+          ) {
+
+            teamSpieler =
+              team.spieler;
+
+          }
+
+          else if (
+            team &&
+            Array.isArray(
+              team.players
+            )
+          ) {
+
+            teamSpieler =
+              team.players;
+
+          }
+
+          else if (
+            team &&
+            Array.isArray(
+              team.mitglieder
+            )
+          ) {
+
+            teamSpieler =
+              team.mitglieder;
+
+          }
+
+
+          /*
+           * Spieler anzeigen
+           */
+
+          teamSpieler.forEach(
+            function(person) {
+
+              const zeile =
+                document.createElement(
+                  "div"
+                );
+
+
+              zeile.className =
+                "team-spieler-zeile";
+
+
+              let name =
+                "";
+
+
+              let notiz =
+                "";
+
+
+              if (
+                typeof person === "string"
+              ) {
+
+                name =
+                  person;
+
+              }
+
+              else if (
+                typeof person === "object"
+              ) {
+
+                name =
+                  person.name ||
+                  (
+                    (
+                      person.vorname ||
+                      ""
+                    ) +
+                    " " +
+                    (
+                      person.nachname ||
+                      ""
+                    )
+                  ).trim();
+
+
+                notiz =
+                  person.notiz ||
+                  "";
+
+              }
+
+
+              if (
+                !name
+              ) {
+
+                name =
+                  "Unbekannter Spieler";
+
+              }
+
+
+              zeile.textContent =
+                name;
+
+
+              if (
+                notiz
+              ) {
+
+                const notizElement =
+                  document.createElement(
+                    "span"
+                  );
+
+
+                notizElement.className =
+                  "team-notiz";
+
+
+                notizElement.textContent =
+                  notiz;
+
+
+                zeile.appendChild(
+                  notizElement
+                );
+
+              }
+
+
+              spielerBox.appendChild(
+                zeile
+              );
+
+            }
+          );
+
+
+          /*
+           * Falls die Struktur
+           * anders geliefert wird,
+           * trotzdem etwas anzeigen.
+           */
+
+          if (
+            teamSpieler.length === 0
+          ) {
+
+            const fallback =
+              document.createElement(
+                "div"
+              );
+
+
+            fallback.className =
+              "team-spieler-zeile";
+
+
+            fallback.textContent =
+              "Team wurde erstellt.";
+
+
+            spielerBox.appendChild(
+              fallback
+            );
+
+          }
+
+
+          teamBox.appendChild(
+            kopf
+          );
+
+
+          teamBox.appendChild(
+            spielerBox
+          );
+
+
+          container.appendChild(
+            teamBox
+          );
+
+        }
+      );
+
+
+      /*
+       * Statistik
+       */
+
+      if (
+        daten.statistik
+      ) {
+
+        statistik.style.display =
+          "block";
+
+
+        if (
+          typeof daten.statistik ===
+          "string"
+        ) {
+
+          statistik.textContent =
+            daten.statistik;
+
+        }
+
+        else {
+
+          statistik.textContent =
+            JSON.stringify(
+              daten.statistik
+            );
+
+        }
+
+      }
+
+      else {
+
+        statistik.style.display =
+          "none";
+
+      }
+
+
+      bereich.style.display =
+        "block";
+
+
+      /*
+       * Zum Ergebnis scrollen
+       */
+
+      setTimeout(
+        function() {
+
+          bereich.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+
+        },
+        100
       );
 
     }
+
 
   </script>
 
