@@ -43,20 +43,24 @@
 
       margin: 0 auto;
 
-      padding: 20px;
+      padding: 15px;
 
     }
 
 
+    /* ==============================
+       KOPF
+       ============================== */
+
     .header {
 
-      background: #ffffff;
+      background: white;
 
       border-radius: 18px;
 
-      padding: 20px;
+      padding: 18px;
 
-      margin-bottom: 15px;
+      margin-bottom: 12px;
 
       text-align: center;
 
@@ -78,22 +82,26 @@
 
     .header p {
 
-      margin: 6px 0 0;
+      margin: 5px 0 0;
 
       color: #666;
 
     }
 
 
+    /* ==============================
+       KARTEN
+       ============================== */
+
     .card {
 
-      background: #ffffff;
+      background: white;
 
       border-radius: 18px;
 
-      padding: 18px;
+      padding: 16px;
 
-      margin-bottom: 15px;
+      margin-bottom: 12px;
 
       box-shadow:
         0 3px 12px
@@ -101,6 +109,10 @@
 
     }
 
+
+    /* ==============================
+       BUTTONS
+       ============================== */
 
     button {
 
@@ -132,68 +144,22 @@
     }
 
 
-    .spieler-liste {
+    button:disabled {
 
-      margin-top: 15px;
+      opacity: 0.5;
 
-    }
-
-
-    .spieler {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 12px;
-
-      margin-bottom: 6px;
-
-      border-radius: 10px;
-
-      background: #f5f5f5;
+      cursor: default;
 
     }
 
 
-    .spieler input {
-
-      width: 25px;
-
-      height: 25px;
-
-      flex-shrink: 0;
-
-    }
-
-
-    .spieler-name {
-
-      flex: 1;
-
-      font-size: 17px;
-
-    }
-
-
-    .notiz {
-
-      font-size: 13px;
-
-      font-weight: bold;
-
-      min-width: 30px;
-
-      text-align: center;
-
-    }
-
+    /* ==============================
+       STATUS
+       ============================== */
 
     .status {
 
-      margin-top: 12px;
+      margin-top: 10px;
 
       text-align: center;
 
@@ -212,6 +178,204 @@
 
     }
 
+
+    /* ==============================
+       SPIELER
+       ============================== */
+
+    .spieler-liste {
+
+      margin-top: 12px;
+
+    }
+
+
+    .spieler {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 11px;
+
+      margin-bottom: 6px;
+
+      border-radius: 10px;
+
+      background: #f1f1f1;
+
+      border: 2px solid transparent;
+
+      transition:
+        background 0.15s,
+        border 0.15s;
+
+    }
+
+
+    /*
+     * Ausgewählter Spieler
+     */
+
+    .spieler.dabei {
+
+      background: #cfe8d5;
+
+      border-color: #75a985;
+
+    }
+
+
+    .spieler input {
+
+      width: 25px;
+
+      height: 25px;
+
+      flex-shrink: 0;
+
+      cursor: pointer;
+
+    }
+
+
+    .spieler-name {
+
+      flex: 1;
+
+      font-size: 17px;
+
+      cursor: pointer;
+
+    }
+
+
+    .notiz {
+
+      min-width: 35px;
+
+      text-align: center;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+    }
+
+
+    .notiz.t {
+
+      color: #444;
+
+    }
+
+
+    .notiz.tplus {
+
+      color: #d18a00;
+
+    }
+
+
+    /* ==============================
+       TEAMAUSWAHL
+       ============================== */
+
+    .team-auswahl {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 12px;
+
+    }
+
+
+    .team-option {
+
+      flex: 1;
+
+      padding: 13px 5px;
+
+      border-radius: 10px;
+
+      border: 2px solid #ddd;
+
+      background: #f5f5f5;
+
+      color: #222;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+
+    .team-option.aktiv {
+
+      background: #1f6feb;
+
+      border-color: #1f6feb;
+
+      color: white;
+
+    }
+
+
+    .zaehler {
+
+      text-align: center;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      margin-top: 5px;
+
+    }
+
+
+    .erstellen {
+
+      margin-top: 15px;
+
+    }
+
+
+    /* ==============================
+       MOBILE
+       ============================== */
+
+    @media (max-width: 400px) {
+
+      .app {
+
+        padding: 10px;
+
+      }
+
+
+      .header h1 {
+
+        font-size: 25px;
+
+      }
+
+
+      .spieler-name {
+
+        font-size: 16px;
+
+      }
+
+    }
+
   </style>
 
 </head>
@@ -223,6 +387,10 @@
   <div class="app">
 
 
+    <!-- ============================
+         KOPF
+         ============================ -->
+
     <div class="header">
 
       <h1>⚽ Marnbach</h1>
@@ -232,6 +400,10 @@
     </div>
 
 
+    <!-- ============================
+         AKTUALISIEREN
+         ============================ -->
+
     <div class="card">
 
       <button
@@ -239,6 +411,7 @@
       >
         Spieler aktualisieren
       </button>
+
 
       <div
         id="status"
@@ -250,6 +423,10 @@
     </div>
 
 
+    <!-- ============================
+         SPIELER
+         ============================ -->
+
     <div
       id="spielerBereich"
       class="card"
@@ -258,10 +435,73 @@
 
       <h2>Spieler</h2>
 
+
+      <div
+        id="zaehler"
+        class="zaehler"
+      >
+        0 Spieler dabei
+      </div>
+
+
       <div
         id="spielerListe"
         class="spieler-liste"
       ></div>
+
+    </div>
+
+
+    <!-- ============================
+         TEAMAUSWAHL
+         ============================ -->
+
+    <div
+      id="teamBereich"
+      class="card"
+      style="display:none;"
+    >
+
+      <h2>Anzahl Teams</h2>
+
+
+      <div class="team-auswahl">
+
+        <button
+          id="team2"
+          class="team-option aktiv"
+          onclick="teamAnzahlWaehlen(2)"
+        >
+          2
+        </button>
+
+
+        <button
+          id="team3"
+          class="team-option"
+          onclick="teamAnzahlWaehlen(3)"
+        >
+          3
+        </button>
+
+
+        <button
+          id="team4"
+          class="team-option"
+          onclick="teamAnzahlWaehlen(4)"
+        >
+          4
+        </button>
+
+      </div>
+
+
+      <button
+        class="erstellen"
+        onclick="teamsErstellen()"
+      >
+        Teams erstellen
+      </button>
 
     </div>
 
@@ -272,10 +512,10 @@
   <script>
 
 
-    /*
-     * Deine bestehende
-     * Master-Web-App
-     */
+    /* ==============================
+       EINSTELLUNGEN
+       ============================== */
+
 
     const MASTER_WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
@@ -284,18 +524,28 @@
     let spieler = [];
 
 
-    /*
-     * Status anzeigen
-     */
+    let anzahlTeams = 2;
 
-    function status(text, fehler = false) {
+
+    /* ==============================
+       STATUS
+       ============================== */
+
+
+    function status(
+      text,
+      fehler = false
+    ) {
 
       const element =
         document.getElementById(
           "status"
         );
 
-      element.textContent = text;
+
+      element.textContent =
+        text;
+
 
       element.className =
         fehler
@@ -305,10 +555,10 @@
     }
 
 
-    /*
-     * Spieler aus der
-     * Master-Web-App laden.
-     */
+    /* ==============================
+       SPIELER LADEN
+       ============================== */
+
 
     function spielerLaden() {
 
@@ -379,9 +629,7 @@
 
       script.src =
         MASTER_WEB_APP_URL +
-        "?action=spieler" +
-        "&prefix=" +
-        callbackName;
+        "?action=spielerPWA";
 
 
       script.onerror =
@@ -404,15 +652,22 @@
     }
 
 
-    /*
-     * Spieler anzeigen
-     */
+    /* ==============================
+       SPIELER ANZEIGEN
+       ============================== */
+
 
     function spielerAnzeigen() {
 
       const bereich =
         document.getElementById(
           "spielerBereich"
+        );
+
+
+      const teamBereich =
+        document.getElementById(
+          "teamBereich"
         );
 
 
@@ -425,23 +680,8 @@
       liste.innerHTML = "";
 
 
-      if (
-        spieler.length === 0
-      ) {
-
-        liste.innerHTML =
-          "<p>Keine Spieler gefunden.</p>";
-
-        bereich.style.display =
-          "block";
-
-        return;
-
-      }
-
-
       spieler.forEach(
-        function(s, index) {
+        function(s) {
 
 
           const zeile =
@@ -466,6 +706,35 @@
 
           checkbox.dataset.id =
             s.id;
+
+
+          checkbox.addEventListener(
+            "change",
+            function() {
+
+              if (
+                checkbox.checked
+              ) {
+
+                zeile.classList.add(
+                  "dabei"
+                );
+
+              }
+
+              else {
+
+                zeile.classList.remove(
+                  "dabei"
+                );
+
+              }
+
+
+              zaehlerAktualisieren();
+
+            }
+          );
 
 
           const name =
@@ -496,8 +765,37 @@
             "notiz";
 
 
-          notiz.textContent =
-            s.notiz || "";
+          const spielerNotiz =
+            String(
+              s.notiz || ""
+            ).trim();
+
+
+          if (
+            spielerNotiz === "T+"
+          ) {
+
+            notiz.textContent =
+              "T+";
+
+            notiz.classList.add(
+              "tplus"
+            );
+
+          }
+
+          else if (
+            spielerNotiz === "T"
+          ) {
+
+            notiz.textContent =
+              "T";
+
+            notiz.classList.add(
+              "t"
+            );
+
+          }
 
 
           zeile.appendChild(
@@ -525,6 +823,114 @@
 
       bereich.style.display =
         "block";
+
+
+      teamBereich.style.display =
+        "block";
+
+
+      zaehlerAktualisieren();
+
+    }
+
+
+    /* ==============================
+       ZÄHLER
+       ============================== */
+
+
+    function zaehlerAktualisieren() {
+
+      const checked =
+        document.querySelectorAll(
+          "#spielerListe input[type='checkbox']:checked"
+        );
+
+
+      const anzahl =
+        checked.length;
+
+
+      document.getElementById(
+        "zaehler"
+      ).textContent =
+        anzahl +
+        " Spieler dabei";
+
+    }
+
+
+    /* ==============================
+       TEAMANZAHL
+       ============================== */
+
+
+    function teamAnzahlWaehlen(
+      anzahl
+    ) {
+
+      anzahlTeams =
+        anzahl;
+
+
+      document
+        .querySelectorAll(
+          ".team-option"
+        )
+        .forEach(
+          function(button) {
+
+            button.classList.remove(
+              "aktiv"
+            );
+
+          }
+        );
+
+
+      document
+        .getElementById(
+          "team" + anzahl
+        )
+        .classList.add(
+          "aktiv"
+        );
+
+    }
+
+
+    /* ==============================
+       TEAMS ERSTELLEN
+       ============================== */
+
+
+    function teamsErstellen() {
+
+      const checked =
+        document.querySelectorAll(
+          "#spielerListe input[type='checkbox']:checked"
+        );
+
+
+      if (
+        checked.length <
+        anzahlTeams
+      ) {
+
+        alert(
+          "Es müssen mindestens " +
+          anzahlTeams +
+          " Spieler dabei sein."
+        );
+
+        return;
+
+      }
+
+
+      alert(
+        "Team-Erstellung kommt als nächster Schritt."
+      );
 
     }
 
