@@ -216,7 +216,7 @@
 
 
     /*
-     * Ausgewählter Spieler
+     * Spieler ist dabei
      */
 
     .spieler.dabei {
@@ -280,6 +280,23 @@
 
 
     /* ==============================
+       ZÄHLER
+       ============================== */
+
+    .zaehler {
+
+      text-align: center;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      margin-top: 5px;
+
+    }
+
+
+    /* ==============================
        TEAMAUSWAHL
        ============================== */
 
@@ -324,19 +341,6 @@
       border-color: #1f6feb;
 
       color: white;
-
-    }
-
-
-    .zaehler {
-
-      text-align: center;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      margin-top: 5px;
 
     }
 
@@ -395,13 +399,13 @@
 
       <h1>⚽ Marnbach</h1>
 
-      <p>Teamgenerator V0.51</p>
+      <p>Teamgenerator V0.5.2</p>
 
     </div>
 
 
     <!-- ============================
-         AKTUALISIEREN
+         SPIELER AKTUALISIEREN
          ============================ -->
 
     <div class="card">
@@ -453,7 +457,7 @@
 
 
     <!-- ============================
-         TEAMAUSWAHL
+         TEAMANZAHL
          ============================ -->
 
     <div
@@ -513,16 +517,18 @@
 
 
     /* ==============================
-       EINSTELLUNGEN
+       MASTER WEB APP
        ============================== */
-
 
     const MASTER_WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
 
 
-    let spieler = [];
+    /* ==============================
+       GLOBALE VARIABLEN
+       ============================== */
 
+    let spieler = [];
 
     let anzahlTeams = 2;
 
@@ -530,7 +536,6 @@
     /* ==============================
        STATUS
        ============================== */
-
 
     function status(
       text,
@@ -559,99 +564,109 @@
        SPIELER LADEN
        ============================== */
 
-function spielerLaden() {
-
-  status(
-    "Spieler werden geladen..."
-  );
-
-
-  window.marnbachSpielerCallback =
-    function(daten) {
-
-      try {
-
-        if (
-          !daten ||
-          !daten.success
-        ) {
-
-          throw new Error(
-            daten?.error ||
-            "Unbekannter Fehler."
-          );
-
-        }
-
-
-        spieler =
-          daten.spieler || [];
-
-
-        spielerAnzeigen();
-
-
-        status(
-          spieler.length +
-          " Spieler geladen."
-        );
-
-
-      }
-      catch (fehler) {
-
-        status(
-          "Fehler: " +
-          fehler.message,
-          true
-        );
-
-      }
-
-
-      delete window.marnbachSpielerCallback;
-
-    };
-
-
-  const script =
-    document.createElement(
-      "script"
-    );
-
-
-  script.src =
-    MASTER_WEB_APP_URL +
-    "?action=spielerPWA" +
-    "&t=" +
-    Date.now();
-
-
-  script.onerror =
-    function() {
+    function spielerLaden() {
 
       status(
-        "Verbindung zur Master-Datei fehlgeschlagen.",
-        true
+        "Spieler werden geladen..."
       );
 
-      delete window.marnbachSpielerCallback;
 
-    };
+      /*
+       * Der Master liefert bei
+       * action=spielerPWA immer:
+       *
+       * marnbachSpielerCallback(...)
+       */
+
+      window.marnbachSpielerCallback =
+        function(daten) {
+
+          try {
+
+            if (
+              !daten ||
+              !daten.success
+            ) {
+
+              throw new Error(
+                daten?.error ||
+                "Unbekannter Fehler."
+              );
+
+            }
 
 
-  document
-    .body
-    .appendChild(script);
+            spieler =
+              daten.spieler || [];
 
-}
-    
+
+            spielerAnzeigen();
+
+
+            status(
+              spieler.length +
+              " Spieler geladen."
+            );
+
+
+          }
+
+          catch (fehler) {
+
+            status(
+              "Fehler: " +
+              fehler.message,
+              true
+            );
+
+          }
+
+
+          delete window.marnbachSpielerCallback;
+
+        };
+
+
+      /*
+       * JSONP-Script erzeugen
+       */
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        MASTER_WEB_APP_URL +
+        "?action=spielerPWA&t=" +
+        Date.now();
+
+
+      script.onerror =
+        function() {
+
+          status(
+            "Verbindung zur Master-Datei fehlgeschlagen.",
+            true
+          );
+
+
+          delete window.marnbachSpielerCallback;
+
+        };
+
+
+      document
+        .body
+        .appendChild(script);
+
+    }
 
 
     /* ==============================
        SPIELER ANZEIGEN
        ============================== */
-
 
     function spielerAnzeigen() {
 
@@ -673,8 +688,16 @@ function spielerLaden() {
         );
 
 
+      /*
+       * Alte Liste löschen
+       */
+
       liste.innerHTML = "";
 
+
+      /*
+       * Jeden Spieler anzeigen
+       */
 
       spieler.forEach(
         function(s) {
@@ -690,6 +713,10 @@ function spielerLaden() {
             "spieler";
 
 
+          /*
+           * Checkbox
+           */
+
           const checkbox =
             document.createElement(
               "input"
@@ -704,9 +731,14 @@ function spielerLaden() {
             s.id;
 
 
+          /*
+           * Checkbox geändert
+           */
+
           checkbox.addEventListener(
             "change",
             function() {
+
 
               if (
                 checkbox.checked
@@ -733,6 +765,10 @@ function spielerLaden() {
           );
 
 
+          /*
+           * Name
+           */
+
           const name =
             document.createElement(
               "span"
@@ -750,6 +786,10 @@ function spielerLaden() {
               s.nachname
             ).trim();
 
+
+          /*
+           * T / T+
+           */
 
           const notiz =
             document.createElement(
@@ -794,6 +834,10 @@ function spielerLaden() {
           }
 
 
+          /*
+           * Elemente zusammensetzen
+           */
+
           zeile.appendChild(
             checkbox
           );
@@ -817,6 +861,10 @@ function spielerLaden() {
       );
 
 
+      /*
+       * Bereiche anzeigen
+       */
+
       bereich.style.display =
         "block";
 
@@ -831,9 +879,8 @@ function spielerLaden() {
 
 
     /* ==============================
-       ZÄHLER
+       SPIELERZÄHLER
        ============================== */
-
 
     function zaehlerAktualisieren() {
 
@@ -857,9 +904,8 @@ function spielerLaden() {
 
 
     /* ==============================
-       TEAMANZAHL
+       TEAMANZAHL AUSWÄHLEN
        ============================== */
-
 
     function teamAnzahlWaehlen(
       anzahl
@@ -868,6 +914,10 @@ function spielerLaden() {
       anzahlTeams =
         anzahl;
 
+
+      /*
+       * Alle Buttons deaktivieren
+       */
 
       document
         .querySelectorAll(
@@ -884,6 +934,10 @@ function spielerLaden() {
         );
 
 
+      /*
+       * Gewählten Button aktivieren
+       */
+
       document
         .getElementById(
           "team" + anzahl
@@ -899,7 +953,6 @@ function spielerLaden() {
        TEAMS ERSTELLEN
        ============================== */
 
-
     function teamsErstellen() {
 
       const checked =
@@ -908,8 +961,16 @@ function spielerLaden() {
         );
 
 
+      const spielerAnzahl =
+        checked.length;
+
+
+      /*
+       * Mindestanzahl prüfen
+       */
+
       if (
-        checked.length <
+        spielerAnzahl <
         anzahlTeams
       ) {
 
@@ -923,6 +984,11 @@ function spielerLaden() {
 
       }
 
+
+      /*
+       * Dieser Teil kommt
+       * im nächsten Schritt.
+       */
 
       alert(
         "Team-Erstellung kommt als nächster Schritt."
