@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Marnbach Teamgenerator</title>
+  <title>Marnbach Teamgenerator V0.5.3</title>
 
 
   <style>
@@ -215,10 +215,6 @@
     }
 
 
-    /*
-     * Spieler ist dabei
-     */
-
     .spieler.dabei {
 
       background: #cfe8d5;
@@ -399,7 +395,7 @@
 
       <h1>⚽ Marnbach</h1>
 
-      <p>Teamgenerator V0.5.2</p>
+      <p>Teamgenerator V0.5.3</p>
 
     </div>
 
@@ -572,13 +568,27 @@
 
 
       /*
-       * Der Master liefert bei
-       * action=spielerPWA immer:
+       * Genau diese Methode hat
+       * vorher bereits funktioniert.
        *
-       * marnbachSpielerCallback(...)
+       * Der Master bekommt:
+       *
+       * action=spieler
+       *
+       * und einen individuellen
+       * JSONP-Callback.
        */
 
-      window.marnbachSpielerCallback =
+      const callbackName =
+        "marnbachSpieler" +
+        Date.now();
+
+
+      /*
+       * Callback im Browser erzeugen
+       */
+
+      window[callbackName] =
         function(daten) {
 
           try {
@@ -622,13 +632,17 @@
           }
 
 
-          delete window.marnbachSpielerCallback;
+          /*
+           * Callback wieder entfernen
+           */
+
+          delete window[callbackName];
 
         };
 
 
       /*
-       * JSONP-Script erzeugen
+       * Script erzeugen
        */
 
       const script =
@@ -637,11 +651,27 @@
         );
 
 
+      /*
+       * WICHTIG:
+       *
+       * action=spieler
+       * prefix=unserCallback
+       */
+
       script.src =
         MASTER_WEB_APP_URL +
-        "?action=spielerPWA&t=" +
+        "?action=spieler" +
+        "&prefix=" +
+        encodeURIComponent(
+          callbackName
+        ) +
+        "&t=" +
         Date.now();
 
+
+      /*
+       * Fehler beim Laden
+       */
 
       script.onerror =
         function() {
@@ -652,7 +682,7 @@
           );
 
 
-          delete window.marnbachSpielerCallback;
+          delete window[callbackName];
 
         };
 
@@ -696,12 +726,16 @@
 
 
       /*
-       * Jeden Spieler anzeigen
+       * Spieler durchlaufen
        */
 
       spieler.forEach(
         function(s) {
 
+
+          /*
+           * Zeile
+           */
 
           const zeile =
             document.createElement(
@@ -738,7 +772,6 @@
           checkbox.addEventListener(
             "change",
             function() {
-
 
               if (
                 checkbox.checked
@@ -835,7 +868,7 @@
 
 
           /*
-           * Elemente zusammensetzen
+           * Zeile zusammensetzen
            */
 
           zeile.appendChild(
@@ -904,7 +937,7 @@
 
 
     /* ==============================
-       TEAMANZAHL AUSWÄHLEN
+       TEAMANZAHL
        ============================== */
 
     function teamAnzahlWaehlen(
@@ -914,10 +947,6 @@
       anzahlTeams =
         anzahl;
 
-
-      /*
-       * Alle Buttons deaktivieren
-       */
 
       document
         .querySelectorAll(
@@ -933,10 +962,6 @@
           }
         );
 
-
-      /*
-       * Gewählten Button aktivieren
-       */
 
       document
         .getElementById(
@@ -965,10 +990,6 @@
         checked.length;
 
 
-      /*
-       * Mindestanzahl prüfen
-       */
-
       if (
         spielerAnzahl <
         anzahlTeams
@@ -986,7 +1007,7 @@
 
 
       /*
-       * Dieser Teil kommt
+       * Echte Team-Erstellung kommt
        * im nächsten Schritt.
        */
 
@@ -995,7 +1016,6 @@
       );
 
     }
-
 
   </script>
 
