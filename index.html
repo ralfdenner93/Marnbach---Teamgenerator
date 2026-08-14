@@ -1439,7 +1439,29 @@ function spielerAnzeigen() {
       zeile.className =
         "player";
 
+      zeile.addEventListener(
+  "click",
+  function() {
 
+    /*
+     * Klick auf die Zeile
+     * wählt den Spieler aus.
+     * Der Torwart-Button wird
+     * davon ausgenommen.
+     */
+
+    checkbox.checked =
+      !checkbox.checked;
+
+    zeile.classList.toggle(
+      "selected",
+      checkbox.checked
+    );
+
+    spielerZaehlen();
+
+  }
+);
       /* ================================================
          SPIELER CHECKBOX
          ================================================ */
