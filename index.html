@@ -697,7 +697,7 @@
 
     <div class="version">
 
-      Teamgenerator V0.6.1
+      Teamgenerator V0.6.0
 
     </div>
 
@@ -988,7 +988,7 @@
      ================================================== */
 
   const MASTER_URL =
-    "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQ5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
+    "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
 
 
   let spieler = [];
@@ -1074,173 +1074,138 @@
 
 
   /* ==================================================
-   SPIELER LADEN
-   ================================================== */
+     SPIELER LADEN
+     ================================================== */
 
-function spielerLaden() {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
+  function spielerLaden() {
 
 
-  status.className =
-    "status";
+    const status =
+      document.getElementById(
+        "status"
+      );
 
 
-  status.textContent =
-    "Spieler werden geladen...";
+    status.className =
+      "status";
 
 
-  const alterScript =
-    document.getElementById(
-      "spielerScript"
-    );
+    status.textContent =
+      "Spieler werden geladen...";
 
 
-  if (
-    alterScript
-  ) {
-
-    alterScript.remove();
-
-  }
+    const alterScript =
+      document.getElementById(
+        "spielerScript"
+      );
 
 
-  /*
-   * Genau der funktionierende
-   * V0.6.0-Weg:
-   *
-   * eigener Callback +
-   * action=spieler
-   */
-
-  const callbackName =
-    "marnbachSpieler" +
-    Date.now();
-
-
-  window[
-    callbackName
-  ] =
-    function(
-      daten
+    if (
+      alterScript
     ) {
 
-      try {
+      alterScript.remove();
 
-        if (
-          !daten ||
-          !daten.success
-        ) {
+    }
 
-          throw new Error(
-            daten &&
-            daten.error
-              ? daten.error
-              : "Ungültige Antwort vom Master."
-          );
+
+    window.marnbachSpielerCallback =
+      function(
+        daten
+      ) {
+
+        try {
+
+          if (
+            !daten ||
+            !daten.success
+          ) {
+
+            throw new Error(
+              daten &&
+              daten.error
+                ? daten.error
+                : "Ungültige Antwort vom Master."
+            );
+
+          }
+
+
+          spieler =
+            Array.isArray(
+              daten.spieler
+            )
+              ? daten.spieler
+              : [];
+
+
+          spielerAnzeigen();
+
+
+          status.className =
+            "status success";
+
+
+          status.textContent =
+            spieler.length +
+            " Spieler geladen.";
 
         }
 
 
-        spieler =
-          Array.isArray(
-            daten.spieler
-          )
-            ? daten.spieler
-            : [];
+        catch (
+          err
+        ) {
+
+          status.className =
+            "status error";
 
 
-        spielerAnzeigen();
+          status.textContent =
+            "Fehler beim Laden der Spieler.";
+
+          console.error(
+            err
+          );
+
+        }
+
+      };
 
 
-        status.className =
-          "status success";
+    const script =
+      document.createElement(
+        "script"
+      );
 
 
-        status.textContent =
-          spieler.length +
-          " Spieler geladen.";
-
-      }
+    script.id =
+      "spielerScript";
 
 
-      catch (
-        err
-      ) {
+    script.src =
+      MASTER_URL +
+      "?action=spielerPWA";
+
+
+    script.onerror =
+      function() {
 
         status.className =
           "status error";
 
 
         status.textContent =
-          "Fehler beim Laden der Spieler.";
+          "Verbindung zur Master-Datei fehlgeschlagen.";
+
+      };
 
 
-        console.error(
-          err
-        );
-
-      }
-
-
-      finally {
-
-        delete window[
-          callbackName
-        ];
-
-      }
-
-    };
-
-
-  const script =
-    document.createElement(
-      "script"
+    document.body.appendChild(
+      script
     );
 
-
-  script.id =
-    "spielerScript";
-
-
-  script.src =
-    MASTER_URL +
-    "?action=spieler" +
-    "&prefix=" +
-    encodeURIComponent(
-      callbackName
-    ) +
-    "&t=" +
-    Date.now();
-
-
-  script.onerror =
-    function() {
-
-      status.className =
-        "status error";
-
-
-      status.textContent =
-        "Verbindung zur Master-Datei fehlgeschlagen.";
-
-
-      delete window[
-        callbackName
-      ];
-
-    };
-
-
-  document.body.appendChild(
-    script
-  );
-
-}
+  }
 
 
   /* ==================================================
@@ -1515,42 +1480,6 @@ function spielerLaden() {
       );
 
 
-    /*
-     * Neue Mannschaften werden erstellt.
-     * Deshalb darf der aktuelle
-     * Speicherstatus nicht mehr gelten.
-     */
-
-    const saveButton =
-      document.getElementById(
-        "teamsSpeichern"
-      );
-
-
-    saveButton.style.display =
-      "none";
-
-
-    saveButton.disabled =
-      false;
-
-
-    saveButton.textContent =
-      "💾 Teams speichern";
-
-
-    document.getElementById(
-      "saveInfo"
-    ).textContent =
-      "";
-
-
-    document.getElementById(
-      "saveInfo"
-    ).className =
-      "save-info";
-
-
     button.disabled =
       true;
 
@@ -1606,22 +1535,14 @@ function spielerLaden() {
           );
 
 
-          /*
-           * Neue Teams wurden erfolgreich
-           * erstellt. Speichern wieder
-           * ermöglichen.
-           */
+          const saveButton =
+            document.getElementById(
+              "teamsSpeichern"
+            );
+
 
           saveButton.style.display =
             "block";
-
-
-          saveButton.disabled =
-            false;
-
-
-          saveButton.textContent =
-            "💾 Teams speichern";
 
 
           document.getElementById(
@@ -2029,16 +1950,6 @@ function spielerLaden() {
             "✓ Teams erfolgreich gespeichert.";
 
 
-          /*
-           * Nach erfolgreichem Speichern
-           * bleibt der Button bewusst
-           * deaktiviert.
-           */
-
-          button.disabled =
-            true;
-
-
           button.textContent =
             "✓ Teams gespeichert";
 
@@ -2192,6 +2103,7 @@ function spielerLaden() {
 
 
         cleanup();
+
 
       },
       15000
