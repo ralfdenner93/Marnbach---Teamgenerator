@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Marnbach Teamgenerator V0.5.6</title>
+  <title>Marnbach Teamgenerator</title>
 
 
   <style>
@@ -20,13 +20,9 @@
     }
 
 
-    html,
     body {
 
       margin: 0;
-      padding: 0;
-
-      width: 100%;
 
       font-family:
         Arial,
@@ -34,14 +30,7 @@
 
       background: #f2f2f2;
 
-      color: #222;
-
-    }
-
-
-    body {
-
-      min-height: 100vh;
+      color: #111;
 
     }
 
@@ -59,9 +48,9 @@
     }
 
 
-    /* ==============================
-       KOPF
-       ============================== */
+    /* ==================================================
+       HEADER
+       ================================================== */
 
     .header {
 
@@ -69,42 +58,112 @@
 
       border-radius: 18px;
 
-      padding: 14px;
+      padding: 18px;
 
       margin-bottom: 10px;
 
       text-align: center;
 
       box-shadow:
-        0 3px 12px
-        rgba(0,0,0,0.12);
+        0 5px 15px rgba(0,0,0,0.10);
 
     }
 
 
-    .header h1 {
+    .logo {
 
-      margin: 0;
+      display: flex;
 
-      font-size: 28px;
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-size: 30px;
+
+      font-weight: bold;
 
     }
 
 
-    .header p {
+    .ball {
 
-      margin: 4px 0 0;
+      font-size: 30px;
 
-      color: #666;
+    }
+
+
+    .version {
+
+      margin-top: 5px;
 
       font-size: 16px;
 
+      color: #666;
+
     }
 
 
-    /* ==============================
-       KARTEN
-       ============================== */
+    /* ==================================================
+       NAVIGATION
+       ================================================== */
+
+    .navigation {
+
+      display: flex;
+
+      gap: 8px;
+
+      background: white;
+
+      padding: 8px;
+
+      border-radius: 15px;
+
+      margin-bottom: 10px;
+
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.08);
+
+    }
+
+
+    .nav-button {
+
+      flex: 1;
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 12px;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      background: #eeeeee;
+
+      color: #111;
+
+    }
+
+
+    .nav-button.active {
+
+      background: #2673e8;
+
+      color: white;
+
+    }
+
+
+    /* ==================================================
+       ALLGEMEINE KARTEN
+       ================================================== */
 
     .card {
 
@@ -112,22 +171,70 @@
 
       border-radius: 18px;
 
-      padding: 14px;
+      padding: 16px;
 
       margin-bottom: 10px;
 
       box-shadow:
-        0 3px 12px
-        rgba(0,0,0,0.10);
+        0 5px 15px rgba(0,0,0,0.10);
 
     }
 
 
-    /* ==============================
+    /* ==================================================
+       STATUS
+       ================================================== */
+
+    .status-card {
+
+      text-align: center;
+
+    }
+
+
+    .status {
+
+      margin-top: 10px;
+
+      font-size: 14px;
+
+      color: #555;
+
+    }
+
+
+    .status.error {
+
+      color: #d00000;
+
+      font-weight: bold;
+
+    }
+
+
+    .status.success {
+
+      color: #008a42;
+
+      font-weight: bold;
+
+    }
+
+
+    /* ==================================================
        BUTTONS
-       ============================== */
+       ================================================== */
 
     button {
+
+      font-family:
+        Arial,
+        sans-serif;
+
+    }
+
+
+    .main-button {
 
       width: 100%;
 
@@ -137,104 +244,191 @@
 
       padding: 14px;
 
+      background: #2673e8;
+
+      color: white;
+
       font-size: 17px;
 
       font-weight: bold;
 
       cursor: pointer;
 
-      background: #1f6feb;
+    }
+
+
+    .main-button:hover {
+
+      background: #1763d7;
+
+    }
+
+
+    .main-button:disabled {
+
+      background: #9dbbe9;
+
+      cursor: not-allowed;
+
+    }
+
+
+    .save-button {
+
+      width: 100%;
+
+      border: none;
+
+      border-radius: 12px;
+
+      padding: 14px;
+
+      background: #198754;
 
       color: white;
 
-    }
-
-
-    button:active {
-
-      transform: scale(0.98);
-
-    }
-
-
-    button:disabled {
-
-      opacity: 0.55;
-
-      cursor: default;
-
-    }
-
-
-    /* ==============================
-       STATUS
-       ============================== */
-
-    .status {
-
-      margin-top: 8px;
-
-      text-align: center;
-
-      color: #666;
-
-      font-size: 14px;
-
-    }
-
-
-    .fehler {
-
-      color: #b00020;
+      font-size: 17px;
 
       font-weight: bold;
 
+      cursor: pointer;
+
+      margin-top: 12px;
+
     }
 
 
-    /* ==============================
-       STEUERUNG
-       ============================== */
+    .save-button:hover {
 
-    .steuerung {
+      background: #147345;
+
+    }
+
+
+    /* ==================================================
+       SPIELERBEREICH
+       ================================================== */
+
+    .players-card {
+
+      padding: 12px;
+
+    }
+
+
+    .players-title {
+
+      font-size: 24px;
+
+      font-weight: bold;
+
+      margin: 5px 0 12px 4px;
+
+    }
+
+
+    .players-scroll {
+
+      max-height: 58vh;
+
+      overflow-y: auto;
+
+      padding-right: 3px;
+
+    }
+
+
+    .player {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      background: #f0f0f0;
+
+      border-radius: 11px;
+
+      padding: 10px 12px;
+
+      margin-bottom: 6px;
+
+      min-height: 54px;
+
+      cursor: pointer;
+
+      transition:
+        background 0.15s,
+        border 0.15s;
+
+      border: 2px solid transparent;
+
+    }
+
+
+    .player.selected {
+
+      background: #cfe8d5;
+
+      border-color: #76b88a;
+
+    }
+
+
+    .player input {
+
+      width: 25px;
+
+      height: 25px;
+
+      margin: 0;
+
+      cursor: pointer;
+
+      accent-color: #2673e8;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .player-name {
+
+      font-size: 17px;
+
+      line-height: 1.2;
+
+    }
+
+
+    /* ==================================================
+       TEAM AUSWAHL
+       ================================================== */
+
+    .team-controls {
 
       position: sticky;
 
       top: 8px;
 
-      z-index: 100;
-
-      background: white;
-
-      border-radius: 18px;
-
-      padding: 14px;
-
-      margin-bottom: 10px;
-
-      box-shadow:
-        0 4px 16px
-        rgba(0,0,0,0.18);
+      z-index: 20;
 
     }
 
 
-    .steuerung-titel {
+    .team-title {
 
-      margin: 0 0 10px 0;
-
-      font-size: 21px;
+      font-size: 22px;
 
       font-weight: bold;
 
+      margin-bottom: 10px;
+
     }
 
 
-    /* ==============================
-       TEAMANZAHL
-       ============================== */
-
-    .team-auswahl {
+    .team-count {
 
       display: flex;
 
@@ -245,19 +439,17 @@
     }
 
 
-    .team-option {
+    .team-count button {
 
       flex: 1;
-
-      padding: 12px 5px;
-
-      border-radius: 10px;
 
       border: 2px solid #ddd;
 
-      background: #f5f5f5;
+      border-radius: 10px;
 
-      color: #222;
+      background: #f4f4f4;
+
+      padding: 13px;
 
       font-size: 17px;
 
@@ -268,243 +460,84 @@
     }
 
 
-    .team-option.aktiv {
+    .team-count button.active {
 
-      background: #1f6feb;
-
-      border-color: #1f6feb;
+      background: #2673e8;
 
       color: white;
 
+      border-color: #2673e8;
+
     }
 
 
-    /* ==============================
-       SPIELERZÄHLER
-       ============================== */
-
-    .zaehler {
-
-      margin-top: 10px;
-
-      padding: 11px;
-
-      border-radius: 10px;
-
-      background: #f1f1f1;
+    .selected-count {
 
       text-align: center;
 
-      font-size: 17px;
+      background: #eeeeee;
+
+      border-radius: 10px;
+
+      padding: 11px;
+
+      margin-top: 10px;
 
       font-weight: bold;
 
     }
 
 
-    /* ==============================
-       SPIELER
-       ============================== */
-
-    .spieler-card {
-
-      padding: 14px;
-
-    }
-
-
-    .spieler-titel {
-
-      margin: 0;
-
-      font-size: 23px;
-
-    }
-
-
-    .spieler-scroll {
-
-      height: 55vh;
-
-      min-height: 300px;
-
-      max-height: 600px;
-
-      overflow-y: auto;
-
-      overflow-x: hidden;
-
-      margin-top: 10px;
-
-      padding-right: 3px;
-
-      -webkit-overflow-scrolling: touch;
-
-      overscroll-behavior: contain;
-
-    }
-
-
-    .spieler-liste {
-
-      width: 100%;
-
-    }
-
-
-    .spieler {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      padding: 11px;
-
-      margin-bottom: 6px;
-
-      border-radius: 10px;
-
-      background: #f1f1f1;
-
-      border: 2px solid transparent;
-
-      transition:
-        background 0.15s,
-        border 0.15s;
-
-      min-height: 49px;
-
-    }
-
-
-    .spieler.dabei {
-
-      background: #cfe8d5;
-
-      border-color: #75a985;
-
-    }
-
-
-    .spieler input {
-
-      width: 25px;
-
-      height: 25px;
-
-      flex-shrink: 0;
-
-      cursor: pointer;
-
-    }
-
-
-    .spieler-name {
-
-      flex: 1;
-
-      font-size: 17px;
-
-      cursor: pointer;
-
-      user-select: none;
-
-    }
-
-
-    .notiz {
-
-      min-width: 35px;
-
-      text-align: center;
-
-      font-size: 14px;
-
-      font-weight: bold;
-
-    }
-
-
-    .notiz.t {
-
-      color: #444;
-
-    }
-
-
-    .notiz.tplus {
-
-      color: #d18a00;
-
-    }
-
-
-    /* ==============================
+    /* ==================================================
        TEAMS
-       ============================== */
+       ================================================== */
 
-    #ergebnisBereich {
+    .teams-title {
 
-      display: none;
+      font-size: 24px;
 
-    }
+      font-weight: bold;
 
-
-    .teams-container {
-
-      display: grid;
-
-      grid-template-columns: 1fr;
-
-      gap: 12px;
-
-      margin-top: 12px;
+      margin: 5px 0 12px 0;
 
     }
 
 
-    .team {
+    .team-card {
+
+      border: 1px solid #d6d6d6;
 
       border-radius: 14px;
 
       overflow: hidden;
 
-      background: #f5f5f5;
+      margin-bottom: 12px;
 
-      border: 1px solid #ddd;
+      background: #f7f7f7;
 
     }
 
 
-    .team-kopf {
+    .team-header {
 
-      padding: 12px;
+      background: #2673e8;
 
       color: white;
 
-      background: #1f6feb;
+      text-align: center;
+
+      padding: 12px;
 
       font-size: 18px;
 
       font-weight: bold;
 
-      text-align: center;
-
     }
 
 
-    .team-spieler {
+    .team-player {
 
-      padding: 8px 12px 12px;
-
-    }
-
-
-    .team-spieler-zeile {
-
-      padding: 8px 4px;
+      padding: 9px 14px;
 
       border-bottom: 1px solid #ddd;
 
@@ -513,121 +546,97 @@
     }
 
 
-    .team-spieler-zeile:last-child {
+    .team-player:last-child {
 
       border-bottom: none;
 
     }
 
 
-    .team-notiz {
-
-      font-size: 13px;
-
-      font-weight: bold;
-
-      margin-left: 5px;
-
-    }
-
-
-    .team-statistik {
-
-      padding: 12px;
-
-      background: #f1f1f1;
-
-      border-radius: 10px;
-
-      margin-top: 12px;
-
-      font-size: 14px;
+    .no-teams {
 
       color: #555;
 
-    }
+      text-align: center;
 
-
-    .neu-erstellen {
-
-      margin-top: 12px;
+      padding: 15px 5px;
 
     }
 
 
-    /* ==============================
-       SCROLLBAR
-       ============================== */
+    /* ==================================================
+       SPEICHERSTATUS
+       ================================================== */
 
-    .spieler-scroll::-webkit-scrollbar {
+    .save-info {
 
-      width: 7px;
+      margin-top: 8px;
 
-    }
+      text-align: center;
 
+      font-size: 14px;
 
-    .spieler-scroll::-webkit-scrollbar-track {
-
-      background: #eeeeee;
-
-      border-radius: 10px;
+      color: #666;
 
     }
 
 
-    .spieler-scroll::-webkit-scrollbar-thumb {
+    /* ==================================================
+       VERLAUF
+       ================================================== */
 
-      background: #bbbbbb;
+    .history-empty {
 
-      border-radius: 10px;
+      text-align: center;
+
+      color: #555;
+
+      padding: 30px 10px;
 
     }
 
 
-    /* ==============================
+    .history-icon {
+
+      font-size: 42px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    /* ==================================================
        MOBILE
-       ============================== */
+       ================================================== */
 
-    @media (max-width: 400px) {
+    @media (
+      max-width: 480px
+    ) {
 
       .app {
 
-        padding: 8px;
+        padding: 7px;
 
       }
 
 
-      .header h1 {
+      .logo {
 
-        font-size: 25px;
-
-      }
-
-
-      .header p {
-
-        font-size: 15px;
+        font-size: 27px;
 
       }
 
 
-      .steuerung-titel {
+      .players-scroll {
 
-        font-size: 20px;
+        max-height: 56vh;
 
       }
 
 
-      .spieler-name {
+      .player-name {
 
         font-size: 16px;
-
-      }
-
-
-      .spieler-scroll {
-
-        height: 55vh;
 
       }
 
@@ -641,32 +650,84 @@
 <body>
 
 
-  <div class="app">
+<div class="app">
 
 
-    <!-- ============================
-         KOPF
-         ============================ -->
+  <!-- ==================================================
+       HEADER
+       ================================================== -->
 
-    <div class="header">
+  <div class="header">
 
-      <h1>⚽ Marnbach</h1>
+    <div class="logo">
 
-      <p>Teamgenerator V0.5.6</p>
+      <span class="ball">⚽</span>
+
+      <span>Marnbach</span>
 
     </div>
 
 
-    <!-- ============================
-         SPIELER AKTUALISIEREN
-         ============================ -->
+    <div class="version">
 
-    <div class="card">
+      Teamgenerator V0.5.7
+
+    </div>
+
+  </div>
+
+
+  <!-- ==================================================
+       NAVIGATION
+       ================================================== -->
+
+  <div class="navigation">
+
+    <button
+      id="navTeams"
+      class="nav-button active"
+      onclick="zeigeSeite('teams')"
+    >
+
+      ⚽ Teams
+
+    </button>
+
+
+    <button
+      id="navVerlauf"
+      class="nav-button"
+      onclick="zeigeSeite('verlauf')"
+    >
+
+      📜 Spielverlauf
+
+    </button>
+
+  </div>
+
+
+  <!-- ==================================================
+       SEITE: TEAMS
+       ================================================== -->
+
+  <div
+    id="seiteTeams"
+  >
+
+
+    <!-- STATUS -->
+
+    <div class="card status-card">
 
       <button
+        id="spielerAktualisieren"
+        class="main-button"
         onclick="spielerLaden()"
       >
+
         Spieler aktualisieren
+
       </button>
 
 
@@ -674,136 +735,152 @@
         id="status"
         class="status"
       >
-        Bereit
+
+        Spieler werden geladen...
+
       </div>
 
     </div>
 
 
-    <!-- ============================
-         STEUERUNG
-         ============================ -->
+    <!-- SPIELER -->
 
-    <div
-      id="steuerung"
-      class="steuerung"
-      style="display:none;"
-    >
+    <div class="card players-card">
 
-      <div class="steuerung-titel">
+      <div class="players-title">
+
+        Spieler
+
+      </div>
+
+
+      <div
+        id="players"
+        class="players-scroll"
+      >
+
+        <div class="no-teams">
+
+          Spieler werden geladen...
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TEAM CONTROLS -->
+
+    <div class="card team-controls">
+
+      <div class="team-title">
 
         Anzahl Teams
 
       </div>
 
 
-      <div class="team-auswahl">
+      <div class="team-count">
 
         <button
           id="team2"
-          class="team-option aktiv"
+          class="active"
           onclick="teamAnzahlWaehlen(2)"
         >
+
           2
+
         </button>
 
 
         <button
           id="team3"
-          class="team-option"
           onclick="teamAnzahlWaehlen(3)"
         >
+
           3
+
         </button>
 
 
         <button
           id="team4"
-          class="team-option"
           onclick="teamAnzahlWaehlen(4)"
         >
+
           4
+
         </button>
 
       </div>
 
 
       <button
-        id="teamsErstellenButton"
+        id="teamsErstellen"
+        class="main-button"
         onclick="teamsErstellen()"
       >
+
         Teams erstellen
+
       </button>
 
 
       <div
-        id="zaehler"
-        class="zaehler"
+        id="selectedCount"
+        class="selected-count"
       >
+
         0 Spieler dabei
-      </div>
-
-    </div>
-
-
-    <!-- ============================
-         SPIELER
-         ============================ -->
-
-    <div
-      id="spielerBereich"
-      class="card spieler-card"
-      style="display:none;"
-    >
-
-      <h2 class="spieler-titel">
-        Spieler
-      </h2>
-
-
-      <div class="spieler-scroll">
-
-        <div
-          id="spielerListe"
-          class="spieler-liste"
-        ></div>
 
       </div>
 
     </div>
 
 
-    <!-- ============================
-         TEAMERGEBNIS
-         ============================ -->
+    <!-- ERGEBNISSE -->
 
-    <div
-      id="ergebnisBereich"
-      class="card"
-    >
+    <div class="card">
 
-      <h2>Teams</h2>
+      <div class="teams-title">
 
+        Teams
 
-      <div
-        id="teamsContainer"
-        class="teams-container"
-      ></div>
+      </div>
 
 
       <div
-        id="statistik"
-        class="team-statistik"
-        style="display:none;"
-      ></div>
+        id="teamsErgebnis"
+      >
 
+        <div class="no-teams">
+
+          Noch keine Teams erstellt.
+
+        </div>
+
+      </div>
+
+
+      <!-- SPEICHERN -->
 
       <button
-        class="neu-erstellen"
-        onclick="teamsErstellen()"
+        id="teamsSpeichern"
+        class="save-button"
+        onclick="teamsSpeichern()"
+        style="display:none;"
       >
-        Teams neu erstellen
+
+        Teams speichern
+
       </button>
+
+
+      <div
+        id="saveInfo"
+        class="save-info"
+      ></div>
 
     </div>
 
@@ -811,1007 +888,1019 @@
   </div>
 
 
-  <script>
+  <!-- ==================================================
+       SEITE: SPIELVERLAUF
+       ================================================== -->
 
+  <div
+    id="seiteVerlauf"
+    style="display:none;"
+  >
 
-    /* ==============================
-       MASTER WEB APP
-       ============================== */
+    <div class="card">
 
-    const MASTER_WEB_APP_URL =
-      "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
+      <div class="teams-title">
 
+        Spielverlauf
 
-    /* ==============================
-       GLOBALE VARIABLEN
-       ============================== */
+      </div>
 
-    let spieler = [];
 
-    let anzahlTeams = 2;
+      <div class="history-empty">
 
+        <div class="history-icon">
 
-    /* ==============================
-       STATUS
-       ============================== */
+          📜
 
-    function status(
-      text,
-      fehler = false
-    ) {
+        </div>
 
-      const element =
-        document.getElementById(
-          "status"
-        );
 
+        <div>
 
-      element.textContent =
-        text;
+          Der Spielverlauf wird hier angezeigt.
 
+        </div>
 
-      element.className =
-        fehler
-          ? "status fehler"
-          : "status";
 
-    }
+        <div
+          style="
+            margin-top:8px;
+            font-size:14px;
+            color:#777;
+          "
+        >
 
+          Die Speicherfunktion wird im nächsten
+          Schritt angebunden.
 
-    /* ==============================
-       SPIELER LADEN
-       ============================== */
+        </div>
 
-    function spielerLaden() {
+      </div>
 
-      status(
-        "Spieler werden geladen..."
-      );
+    </div>
 
+  </div>
 
-      const callbackName =
-        "marnbachSpieler" +
-        Date.now();
 
+</div>
 
-      window[callbackName] =
-        function(daten) {
 
-          try {
+<script>
 
-            if (
-              !daten ||
-              !daten.success
-            ) {
 
-              throw new Error(
-                daten?.error ||
-                "Unbekannter Fehler."
-              );
+  /* ==================================================
+     MASTER
+     ================================================== */
 
-            }
+  const MASTER_URL =
+    "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
 
 
-            spieler =
-              daten.spieler || [];
+  let spieler = [];
 
+  let anzahlTeams = 2;
 
-            spielerAnzeigen();
+  let aktuelleTeams = null;
 
 
-            status(
-              spieler.length +
-              " Spieler geladen."
-            );
+  /* ==================================================
+     NAVIGATION
+     ================================================== */
 
-          }
+  function zeigeSeite(
+    seite
+  ) {
 
-          catch (fehler) {
 
-            status(
-              "Fehler: " +
-              fehler.message,
-              true
-            );
-
-          }
-
-
-          delete window[callbackName];
-
-        };
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      script.src =
-        MASTER_WEB_APP_URL +
-        "?action=spieler" +
-        "&prefix=" +
-        encodeURIComponent(
-          callbackName
-        ) +
-        "&t=" +
-        Date.now();
-
-
-      script.onerror =
-        function() {
-
-          status(
-            "Verbindung zur Master-Datei fehlgeschlagen.",
-            true
-          );
-
-
-          delete window[callbackName];
-
-        };
-
-
-      document
-        .body
-        .appendChild(script);
-
-    }
-
-
-    /* ==============================
-       SPIELER ANZEIGEN
-       ============================== */
-
-    function spielerAnzeigen() {
-
-      const bereich =
-        document.getElementById(
-          "spielerBereich"
-        );
-
-
-      const steuerung =
-        document.getElementById(
-          "steuerung"
-        );
-
-
-      const liste =
-        document.getElementById(
-          "spielerListe"
-        );
-
-
-      liste.innerHTML = "";
-
-
-      spieler.forEach(
-        function(s) {
-
-          const zeile =
-            document.createElement(
-              "label"
-            );
-
-
-          zeile.className =
-            "spieler";
-
-
-          const checkbox =
-            document.createElement(
-              "input"
-            );
-
-
-          checkbox.type =
-            "checkbox";
-
-
-          checkbox.dataset.id =
-            s.id;
-
-
-          checkbox.addEventListener(
-            "change",
-            function() {
-
-              if (
-                checkbox.checked
-              ) {
-
-                zeile.classList.add(
-                  "dabei"
-                );
-
-              }
-
-              else {
-
-                zeile.classList.remove(
-                  "dabei"
-                );
-
-              }
-
-
-              zaehlerAktualisieren();
-
-            }
-          );
-
-
-          const name =
-            document.createElement(
-              "span"
-            );
-
-
-          name.className =
-            "spieler-name";
-
-
-          name.textContent =
-            (
-              s.vorname +
-              " " +
-              s.nachname
-            ).trim();
-
-
-          const notiz =
-            document.createElement(
-              "span"
-            );
-
-
-          notiz.className =
-            "notiz";
-
-
-          const spielerNotiz =
-            String(
-              s.notiz || ""
-            ).trim();
-
-
-          if (
-            spielerNotiz === "T+"
-          ) {
-
-            notiz.textContent =
-              "T+";
-
-            notiz.classList.add(
-              "tplus"
-            );
-
-          }
-
-          else if (
-            spielerNotiz === "T"
-          ) {
-
-            notiz.textContent =
-              "T";
-
-            notiz.classList.add(
-              "t"
-            );
-
-          }
-
-
-          zeile.appendChild(
-            checkbox
-          );
-
-
-          zeile.appendChild(
-            name
-          );
-
-
-          zeile.appendChild(
-            notiz
-          );
-
-
-          liste.appendChild(
-            zeile
-          );
-
-        }
-      );
-
-
-      bereich.style.display =
-        "block";
-
-
-      steuerung.style.display =
-        "block";
-
-
-      zaehlerAktualisieren();
-
-    }
-
-
-    /* ==============================
-       SPIELERZÄHLER
-       ============================== */
-
-    function zaehlerAktualisieren() {
-
-      const checked =
-        document.querySelectorAll(
-          "#spielerListe input[type='checkbox']:checked"
-        );
-
-
-      const anzahl =
-        checked.length;
-
-
+    const teamsSeite =
       document.getElementById(
-        "zaehler"
-      ).textContent =
-        anzahl +
-        " Spieler dabei";
-
-    }
-
-
-    /* ==============================
-       TEAMANZAHL
-       ============================== */
-
-    function teamAnzahlWaehlen(
-      anzahl
-    ) {
-
-      anzahlTeams =
-        anzahl;
-
-
-      document
-        .querySelectorAll(
-          ".team-option"
-        )
-        .forEach(
-          function(button) {
-
-            button.classList.remove(
-              "aktiv"
-            );
-
-          }
-        );
-
-
-      document
-        .getElementById(
-          "team" + anzahl
-        )
-        .classList.add(
-          "aktiv"
-        );
-
-    }
-
-
-    /* ==============================
-       AUSGEWÄHLTE SPIELER
-       ============================== */
-
-    function ausgewaehlteSpieler() {
-
-      const checked =
-        document.querySelectorAll(
-          "#spielerListe input[type='checkbox']:checked"
-        );
-
-
-      const ids = [];
-
-      const notizen = {};
-
-
-      checked.forEach(
-        function(checkbox) {
-
-          const id =
-            Number(
-              checkbox.dataset.id
-            );
-
-
-          ids.push(id);
-
-
-          const spielerObjekt =
-            spieler.find(
-              function(s) {
-
-                return Number(s.id) === id;
-
-              }
-            );
-
-
-          if (
-            spielerObjekt
-          ) {
-
-            const notiz =
-              String(
-                spielerObjekt.notiz || ""
-              ).trim();
-
-
-            if (
-              notiz === "T" ||
-              notiz === "T+"
-            ) {
-
-              notizen[id] =
-                notiz;
-
-            }
-
-          }
-
-        }
+        "seiteTeams"
       );
 
 
-      return {
+    const verlaufSeite =
+      document.getElementById(
+        "seiteVerlauf"
+      );
 
-        ids: ids,
 
-        notizen: notizen
+    const navTeams =
+      document.getElementById(
+        "navTeams"
+      );
+
+
+    const navVerlauf =
+      document.getElementById(
+        "navVerlauf"
+      );
+
+
+    if (
+      seite === "teams"
+    ) {
+
+      teamsSeite.style.display =
+        "block";
+
+      verlaufSeite.style.display =
+        "none";
+
+      navTeams.classList.add(
+        "active"
+      );
+
+      navVerlauf.classList.remove(
+        "active"
+      );
+
+    }
+
+
+    else {
+
+      teamsSeite.style.display =
+        "none";
+
+      verlaufSeite.style.display =
+        "block";
+
+      navTeams.classList.remove(
+        "active"
+      );
+
+      navVerlauf.classList.add(
+        "active"
+      );
+
+    }
+
+  }
+
+
+  /* ==================================================
+     SPIELER LADEN
+     ================================================== */
+
+  function spielerLaden() {
+
+
+    const status =
+      document.getElementById(
+        "status"
+      );
+
+
+    status.className =
+      "status";
+
+
+    status.textContent =
+      "Spieler werden geladen...";
+
+
+    const alterScript =
+      document.getElementById(
+        "spielerScript"
+      );
+
+
+    if (
+      alterScript
+    ) {
+
+      alterScript.remove();
+
+    }
+
+
+    window.marnbachSpielerCallback =
+      function(
+        daten
+      ) {
+
+        try {
+
+          if (
+            !daten ||
+            !daten.success
+          ) {
+
+            throw new Error(
+              daten &&
+              daten.error
+                ? daten.error
+                : "Ungültige Antwort vom Master."
+            );
+
+          }
+
+
+          spieler =
+            Array.isArray(
+              daten.spieler
+            )
+              ? daten.spieler
+              : [];
+
+
+          spielerAnzeigen();
+
+
+          status.className =
+            "status success";
+
+
+          status.textContent =
+            spieler.length +
+            " Spieler geladen.";
+
+        }
+
+
+        catch (
+          err
+        ) {
+
+          status.className =
+            "status error";
+
+
+          status.textContent =
+            "Fehler beim Laden der Spieler.";
+
+          console.error(
+            err
+          );
+
+        }
 
       };
 
-    }
 
-
-    /* ==============================
-       TEAMS ERSTELLEN
-       ============================== */
-
-    function teamsErstellen() {
-
-      const auswahl =
-        ausgewaehlteSpieler();
-
-
-      const spielerAnzahl =
-        auswahl.ids.length;
-
-
-      if (
-        spielerAnzahl <
-        anzahlTeams
-      ) {
-
-        alert(
-          "Es müssen mindestens " +
-          anzahlTeams +
-          " Spieler dabei sein."
-        );
-
-        return;
-
-      }
-
-
-      const button =
-        document.getElementById(
-          "teamsErstellenButton"
-        );
-
-
-      if (
-        button
-      ) {
-
-        button.disabled =
-          true;
-
-        button.textContent =
-          "Teams werden erstellt...";
-
-      }
-
-
-      status(
-        "Teams werden erstellt..."
+    const script =
+      document.createElement(
+        "script"
       );
 
 
-      const callbackName =
-        "marnbachTeams" +
-        Date.now();
+    script.id =
+      "spielerScript";
 
 
-      window[callbackName] =
-        function(daten) {
-
-          try {
-
-            if (
-              !daten ||
-              daten.success === false
-            ) {
-
-              throw new Error(
-                daten?.error ||
-                "Die Team-Erstellung ist fehlgeschlagen."
-              );
-
-            }
+    script.src =
+      MASTER_URL +
+      "?action=spielerPWA";
 
 
-            teamsAnzeigen(
-              daten
-            );
+    script.onerror =
+      function() {
+
+        status.className =
+          "status error";
 
 
-            status(
-              "Teams erfolgreich erstellt."
-            );
+        status.textContent =
+          "Verbindung zur Master-Datei fehlgeschlagen.";
 
-          }
-
-          catch (fehler) {
-
-            status(
-              "Fehler: " +
-              fehler.message,
-              true
-            );
+      };
 
 
-            alert(
-              "Fehler beim Erstellen der Teams:\n\n" +
-              fehler.message
-            );
+    document.body.appendChild(
+      script
+    );
 
-          }
-
-
-          delete window[callbackName];
+  }
 
 
-          if (
-            button
-          ) {
+  /* ==================================================
+     SPIELER ANZEIGEN
+     ================================================== */
 
-            button.disabled =
-              false;
-
-            button.textContent =
-              "Teams erstellen";
-
-          }
-
-        };
+  function spielerAnzeigen() {
 
 
-      const idsParameter =
-        encodeURIComponent(
-          JSON.stringify(
-            auswahl.ids
-          )
-        );
+    const container =
+      document.getElementById(
+        "players"
+      );
 
 
-      const notizenParameter =
-        encodeURIComponent(
-          JSON.stringify(
-            auswahl.notizen
-          )
-        );
+    container.innerHTML =
+      "";
 
 
-      const url =
-        MASTER_WEB_APP_URL +
-        "?action=teams" +
-        "&ids=" +
-        idsParameter +
-        "&anzahlTeams=" +
-        encodeURIComponent(
-          anzahlTeams
-        ) +
-        "&notizen=" +
-        notizenParameter +
-        "&prefix=" +
-        encodeURIComponent(
-          callbackName
-        ) +
-        "&t=" +
-        Date.now();
+    if (
+      !spieler.length
+    ) {
 
+      container.innerHTML =
+        `
+          <div class="no-teams">
+            Keine Spieler vorhanden.
+          </div>
+        `;
 
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      script.src =
-        url;
-
-
-      script.onerror =
-        function() {
-
-          status(
-            "Verbindung zur Team-Erstellung fehlgeschlagen.",
-            true
-          );
-
-
-          alert(
-            "Die Verbindung zur Master-Datei für die Team-Erstellung ist fehlgeschlagen."
-          );
-
-
-          delete window[callbackName];
-
-
-          if (
-            button
-          ) {
-
-            button.disabled =
-              false;
-
-            button.textContent =
-              "Teams erstellen";
-
-          }
-
-        };
-
-
-      document
-        .body
-        .appendChild(script);
+      return;
 
     }
 
 
-    /* ==============================
-       TEAMS ANZEIGEN
-       ============================== */
-
-    function teamsAnzeigen(
-      daten
-    ) {
-
-      const bereich =
-        document.getElementById(
-          "ergebnisBereich"
-        );
+    spieler.forEach(
+      function(
+        s
+      ) {
 
 
-      const container =
-        document.getElementById(
-          "teamsContainer"
-        );
+        const name =
+          (
+            String(
+              s.vorname ||
+              ""
+            ).trim() +
+            " " +
+            String(
+              s.nachname ||
+              ""
+            ).trim()
+          ).trim();
 
 
-      const statistik =
-        document.getElementById(
-          "statistik"
-        );
-
-
-      container.innerHTML =
-        "";
-
-
-      statistik.innerHTML =
-        "";
-
-
-      /*
-       * DER WICHTIGE FIX:
-       *
-       * Der Master liefert:
-       *
-       * {
-       *   A: [...],
-       *   B: [...],
-       *   C: [...],
-       *   D: [...]
-       * }
-       *
-       * und KEIN Array.
-       */
-
-      const teams =
-        daten &&
-        daten.teams
-          ? daten.teams
-          : {};
-
-
-      const teamBuchstaben =
-        [
-          "A",
-          "B",
-          "C",
-          "D"
-        ];
-
-
-      let vorhandeneTeams = 0;
-
-
-      teamBuchstaben.forEach(
-        function(teamName) {
-
-          if (
-            !Array.isArray(
-              teams[teamName]
-            )
-          ) {
-
-            return;
-
-          }
-
-
-          /*
-           * Nur die tatsächlich
-           * gewünschten Teams anzeigen.
-           */
-
-          if (
-            vorhandeneTeams >=
-            anzahlTeams
-          ) {
-
-            return;
-
-          }
-
-
-          vorhandeneTeams++;
-
-
-          const teamBox =
-            document.createElement(
-              "div"
-            );
-
-
-          teamBox.className =
-            "team";
-
-
-          const kopf =
-            document.createElement(
-              "div"
-            );
-
-
-          kopf.className =
-            "team-kopf";
-
-
-          kopf.textContent =
-            "Team " +
-            teamName;
-
-
-          const spielerBox =
-            document.createElement(
-              "div"
-            );
-
-
-          spielerBox.className =
-            "team-spieler";
-
-
-          teams[teamName].forEach(
-            function(person) {
-
-              const zeile =
-                document.createElement(
-                  "div"
-                );
-
-
-              zeile.className =
-                "team-spieler-zeile";
-
-
-              zeile.textContent =
-                String(
-                  person
-                );
-
-
-              spielerBox.appendChild(
-                zeile
-              );
-
-            }
+        const zeile =
+          document.createElement(
+            "label"
           );
 
 
+        zeile.className =
+          "player";
+
+
+        const checkbox =
+          document.createElement(
+            "input"
+          );
+
+
+        checkbox.type =
+          "checkbox";
+
+
+        checkbox.className =
+          "spieler-checkbox";
+
+
+        checkbox.dataset.id =
+          s.id;
+
+
+        checkbox.addEventListener(
+          "change",
+          function() {
+
+            if (
+              checkbox.checked
+            ) {
+
+              zeile.classList.add(
+                "selected"
+              );
+
+            }
+
+            else {
+
+              zeile.classList.remove(
+                "selected"
+              );
+
+            }
+
+
+            spielerZaehlen();
+
+          }
+        );
+
+
+        const text =
+          document.createElement(
+            "span"
+          );
+
+
+        text.className =
+          "player-name";
+
+
+        text.textContent =
+          name;
+
+
+        zeile.appendChild(
+          checkbox
+        );
+
+
+        zeile.appendChild(
+          text
+        );
+
+
+        container.appendChild(
+          zeile
+        );
+
+      }
+    );
+
+
+    spielerZaehlen();
+
+  }
+
+
+  /* ==================================================
+     SPIELER ZÄHLEN
+     ================================================== */
+
+  function spielerZaehlen() {
+
+
+    const checked =
+      document.querySelectorAll(
+        ".spieler-checkbox:checked"
+      );
+
+
+    const anzahl =
+      checked.length;
+
+
+    const element =
+      document.getElementById(
+        "selectedCount"
+      );
+
+
+    element.textContent =
+      anzahl +
+      (
+        anzahl === 1
+          ? " Spieler dabei"
+          : " Spieler dabei"
+      );
+
+  }
+
+
+  /* ==================================================
+     ANZAHL TEAMS
+     ================================================== */
+
+  function teamAnzahlWaehlen(
+    anzahl
+  ) {
+
+
+    anzahlTeams =
+      anzahl;
+
+
+    document
+      .querySelectorAll(
+        ".team-count button"
+      )
+      .forEach(
+        function(
+          button
+        ) {
+
+          button.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "team" +
+        anzahl
+      )
+      .classList.add(
+        "active"
+      );
+
+  }
+
+
+  /* ==================================================
+     TEAMS ERSTELLEN
+     ================================================== */
+
+  function teamsErstellen() {
+
+
+    const checked =
+      Array.from(
+        document.querySelectorAll(
+          ".spieler-checkbox:checked"
+        )
+      );
+
+
+    if (
+      checked.length <
+      anzahlTeams
+    ) {
+
+      alert(
+        "Es müssen mindestens so viele Spieler wie Teams ausgewählt sein."
+      );
+
+      return;
+
+    }
+
+
+    const ids =
+      checked.map(
+        function(
+          checkbox
+        ) {
+
+          return checkbox.dataset.id;
+
+        }
+      );
+
+
+    const button =
+      document.getElementById(
+        "teamsErstellen"
+      );
+
+
+    const ergebnis =
+      document.getElementById(
+        "teamsErgebnis"
+      );
+
+
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Teams werden erstellt...";
+
+
+    ergebnis.innerHTML =
+      `
+        <div class="no-teams">
+          Teams werden erstellt...
+        </div>
+      `;
+
+
+    const callbackName =
+      "marnbachTeamsCallback_" +
+      Date.now();
+
+
+    window[
+      callbackName
+    ] =
+      function(
+        daten
+      ) {
+
+
+        try {
+
           if (
-            teams[teamName].length === 0
+            !daten ||
+            !daten.success
           ) {
 
-            const leer =
+            throw new Error(
+              daten &&
+              daten.error
+                ? daten.error
+                : "Der Master konnte keine Teams erstellen."
+            );
+
+          }
+
+
+          aktuelleTeams =
+            daten.teams;
+
+
+          teamsAnzeigen(
+            daten.teams
+          );
+
+
+          const saveButton =
+            document.getElementById(
+              "teamsSpeichern"
+            );
+
+
+          saveButton.style.display =
+            "block";
+
+
+          document.getElementById(
+            "saveInfo"
+          ).textContent =
+            "";
+
+
+        }
+
+
+        catch (
+          err
+        ) {
+
+          ergebnis.innerHTML =
+            `
+              <div class="no-teams"
+                   style="color:#d00000;">
+                ${escapeHtml(
+                  err.message
+                )}
+              </div>
+            `;
+
+        }
+
+
+        finally {
+
+          button.disabled =
+            false;
+
+          button.textContent =
+            "Teams erstellen";
+
+
+          cleanup();
+
+        }
+
+      };
+
+
+    const notizen =
+      {};
+
+
+    const params =
+      new URLSearchParams();
+
+
+    params.set(
+      "action",
+      "teams"
+    );
+
+
+    params.set(
+      "ids",
+      JSON.stringify(
+        ids
+      )
+    );
+
+
+    params.set(
+      "anzahlTeams",
+      String(
+        anzahlTeams
+      )
+    );
+
+
+    params.set(
+      "notizen",
+      JSON.stringify(
+        notizen
+      )
+    );
+
+
+    params.set(
+      "prefix",
+      callbackName
+    );
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.id =
+      callbackName;
+
+
+    script.src =
+      MASTER_URL +
+      "?" +
+      params.toString();
+
+
+    script.onerror =
+      function() {
+
+        ergebnis.innerHTML =
+          `
+            <div class="no-teams"
+                 style="color:#d00000;">
+              Verbindung zur Master-Datei fehlgeschlagen.
+            </div>
+          `;
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "Teams erstellen";
+
+
+        cleanup();
+
+      };
+
+
+    document.body.appendChild(
+      script
+    );
+
+
+    function cleanup() {
+
+      try {
+
+        delete window[
+          callbackName
+        ];
+
+      }
+
+      catch (
+        e
+      ) {}
+
+
+      const element =
+        document.getElementById(
+          callbackName
+        );
+
+
+      if (
+        element
+      ) {
+
+        element.remove();
+
+      }
+
+    }
+
+  }
+
+
+  /* ==================================================
+     TEAMS ANZEIGEN
+     ================================================== */
+
+  function teamsAnzeigen(
+    teams
+  ) {
+
+
+    const container =
+      document.getElementById(
+        "teamsErgebnis"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    if (
+      !teams
+    ) {
+
+      container.innerHTML =
+        `
+          <div class="no-teams">
+            Keine Teams zurückgegeben.
+          </div>
+        `;
+
+      return;
+
+    }
+
+
+    const namen =
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ];
+
+
+    namen.forEach(
+      function(
+        buchstabe
+      ) {
+
+
+        const spielerImTeam =
+          Array.isArray(
+            teams[
+              buchstabe
+            ]
+          )
+            ? teams[
+                buchstabe
+              ]
+            : [];
+
+
+        if (
+          !spielerImTeam.length
+        ) {
+
+          return;
+
+        }
+
+
+        const teamCard =
+          document.createElement(
+            "div"
+          );
+
+
+        teamCard.className =
+          "team-card";
+
+
+        const header =
+          document.createElement(
+            "div"
+          );
+
+
+        header.className =
+          "team-header";
+
+
+        header.textContent =
+          "Team " +
+          buchstabe;
+
+
+        teamCard.appendChild(
+          header
+        );
+
+
+        spielerImTeam.forEach(
+          function(
+            name
+          ) {
+
+
+            const player =
               document.createElement(
                 "div"
               );
 
 
-            leer.className =
-              "team-spieler-zeile";
+            player.className =
+              "team-player";
 
 
-            leer.textContent =
-              "Keine Spieler";
+            player.textContent =
+              name;
 
 
-            spielerBox.appendChild(
-              leer
+            teamCard.appendChild(
+              player
             );
 
           }
+        );
 
 
-          teamBox.appendChild(
-            kopf
-          );
+        container.appendChild(
+          teamCard
+        );
+
+      }
+    );
+
+  }
 
 
-          teamBox.appendChild(
-            spielerBox
-          );
+  /* ==================================================
+     TEAMS SPEICHERN
+     ==================================================
+     
+     V0.5.7:
+     Der Button ist bereits vorhanden.
+     Die eigentliche Master-Speicherung wird
+     im nächsten Schritt angebunden.
+     ================================================== */
+
+  function teamsSpeichern() {
 
 
-          container.appendChild(
-            teamBox
-          );
+    if (
+      !aktuelleTeams
+    ) {
 
-        }
+      alert(
+        "Bitte zuerst Teams erstellen."
       );
 
-
-      if (
-        vorhandeneTeams === 0
-      ) {
-
-        container.innerHTML =
-          "<p>Der Master hat keine Teams zurückgegeben.</p>";
-
-      }
-
-
-      /*
-       * Statistik anzeigen
-       */
-
-      if (
-        daten &&
-        daten.statistik
-      ) {
-
-        statistik.style.display =
-          "block";
-
-
-        const st =
-          daten.statistik;
-
-
-        let html =
-          "<strong>Teamstatistik</strong>";
-
-
-        if (
-          Array.isArray(st.gesamt)
-        ) {
-
-          html +=
-            "<br><br>" +
-            "Gesamt: " +
-            st.gesamt.join(
-              " · "
-            );
-
-        }
-
-
-        if (
-          Array.isArray(st.lauf)
-        ) {
-
-          html +=
-            "<br>Lauf: " +
-            st.lauf.join(
-              " · "
-            );
-
-        }
-
-
-        if (
-          Array.isArray(st.spiel)
-        ) {
-
-          html +=
-            "<br>Spiel: " +
-            st.spiel.join(
-              " · "
-            );
-
-        }
-
-
-        if (
-          Array.isArray(st.durchsetzung)
-        ) {
-
-          html +=
-            "<br>Durchsetzung: " +
-            st.durchsetzung.join(
-              " · "
-            );
-
-        }
-
-
-        statistik.innerHTML =
-          html;
-
-      }
-
-      else {
-
-        statistik.style.display =
-          "none";
-
-      }
-
-
-      bereich.style.display =
-        "block";
-
-
-      /*
-       * Zum Ergebnis scrollen.
-       */
-
-      setTimeout(
-        function() {
-
-          bereich.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        },
-        100
-      );
+      return;
 
     }
 
 
-  </script>
+    const info =
+      document.getElementById(
+        "saveInfo"
+      );
+
+
+    info.textContent =
+      "Die Speicherfunktion wird als nächstes angebunden.";
+
+
+    alert(
+      "Die Teams sind bereit zum Speichern. Die Verbindung zum Spielverlauf bauen wir im nächsten Schritt ein."
+    );
+
+  }
+
+
+  /* ==================================================
+     HTML SICHER DARSTELLEN
+     ================================================== */
+
+  function escapeHtml(
+    text
+  ) {
+
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+
+    div.textContent =
+      text;
+
+
+    return div.innerHTML;
+
+  }
+
+
+  /* ==================================================
+     START
+     ================================================== */
+
+  window.addEventListener(
+    "load",
+    function() {
+
+      spielerLaden();
+
+    }
+  );
+
+
+</script>
 
 
 </body>
