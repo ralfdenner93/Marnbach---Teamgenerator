@@ -23,6 +23,7 @@
   box-sizing: border-box;
 }
 
+
 :root {
 
   --bg: #f2f2f2;
@@ -53,7 +54,12 @@
 
   --gold: #d6a21e;
 
-  --shadow: 0 5px 15px rgba(0,0,0,0.10);
+  --gold-light: #f0c75e;
+
+  --gold-dark: #a67b0c;
+
+  --shadow:
+    0 5px 15px rgba(0,0,0,0.10);
 
 }
 
@@ -92,7 +98,69 @@ body.darkmode {
 
   --gold: #d9a72b;
 
-  --shadow: 0 6px 20px rgba(0,0,0,0.28);
+  --gold-light: #efc65a;
+
+  --gold-dark: #a77b0d;
+
+  --shadow:
+    0 6px 20px rgba(0,0,0,0.28);
+
+}
+
+
+/* ==================================================
+   GOLD STYLE
+   ================================================== */
+
+body.goldmode {
+
+  --bg: #050607;
+
+  --card: #0c0e10;
+
+  --text: #f4f4f4;
+
+  --muted: #96999f;
+
+  --soft: #121417;
+
+  --player: #101214;
+
+  --border: #282b30;
+
+  --blue: #dcae38;
+
+  --blue-hover: #f0c85d;
+
+  --green: #1e5d3d;
+
+  --green-light: #201b10;
+
+  --green-border: #c89b2e;
+
+  --danger: #ff6666;
+
+  --gold: #dcae38;
+
+  --gold-light: #f2c957;
+
+  --gold-dark: #9c7218;
+
+  --shadow:
+    0 8px 24px rgba(0,0,0,0.42);
+
+}
+
+
+body.goldmode {
+
+  background:
+    radial-gradient(
+      circle at top,
+      #17140d 0%,
+      #08090a 35%,
+      #050607 75%
+    );
 
 }
 
@@ -114,8 +182,8 @@ body {
   color: var(--text);
 
   transition:
-    background 0.2s ease,
-    color 0.2s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 
 }
 
@@ -152,6 +220,21 @@ body {
   text-align: center;
 
   box-shadow: var(--shadow);
+
+  border:
+    1px solid transparent;
+
+}
+
+
+body.goldmode .header {
+
+  border-color:
+    rgba(220,174,56,0.45);
+
+  box-shadow:
+    0 8px 28px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.03);
 
 }
 
@@ -191,6 +274,14 @@ body {
 }
 
 
+body.goldmode .version {
+
+  color:
+    var(--gold-light);
+
+}
+
+
 /* ==================================================
    OPTIONEN BUTTON
    ================================================== */
@@ -207,7 +298,8 @@ body {
 
   height: 42px;
 
-  border: none;
+  border:
+    1px solid var(--border);
 
   border-radius: 12px;
 
@@ -225,6 +317,20 @@ body {
 .options-button:hover {
 
   background: var(--border);
+
+}
+
+
+body.goldmode .options-button {
+
+  border-color:
+    rgba(220,174,56,0.65);
+
+  color:
+    var(--gold-light);
+
+  background:
+    rgba(220,174,56,0.06);
 
 }
 
@@ -248,6 +354,14 @@ body {
   margin-bottom: 10px;
 
   box-shadow: var(--shadow);
+
+}
+
+
+body.goldmode .navigation {
+
+  border:
+    1px solid rgba(220,174,56,0.35);
 
 }
 
@@ -284,6 +398,16 @@ body {
 }
 
 
+body.goldmode .nav-button.active {
+
+  color: #111;
+
+  box-shadow:
+    0 0 12px rgba(220,174,56,0.18);
+
+}
+
+
 /* ==================================================
    KARTEN
    ================================================== */
@@ -299,6 +423,17 @@ body {
   margin-bottom: 10px;
 
   box-shadow: var(--shadow);
+
+  border:
+    1px solid transparent;
+
+}
+
+
+body.goldmode .card {
+
+  border-color:
+    rgba(220,174,56,0.32);
 
 }
 
@@ -343,6 +478,14 @@ body {
 }
 
 
+body.goldmode .status.success {
+
+  color:
+    var(--gold-light);
+
+}
+
+
 /* ==================================================
    BUTTONS
    ================================================== */
@@ -376,12 +519,16 @@ button {
 
   cursor: pointer;
 
+  transition:
+    0.18s ease;
+
 }
 
 
 .main-button:hover {
 
-  background: var(--blue-hover);
+  background:
+    var(--blue-hover);
 
 }
 
@@ -391,6 +538,37 @@ button {
   opacity: 0.55;
 
   cursor: not-allowed;
+
+}
+
+
+body.goldmode .main-button {
+
+  color: #111;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b9851d,
+      #e8bd4d,
+      #c79526
+    );
+
+  box-shadow:
+    0 0 16px rgba(220,174,56,0.18);
+
+}
+
+
+body.goldmode .main-button:hover {
+
+  background:
+    linear-gradient(
+      135deg,
+      #c99728,
+      #f2ca5d,
+      #d3a333
+    );
 
 }
 
@@ -422,7 +600,8 @@ button {
 
 .save-button:hover {
 
-  filter: brightness(0.92);
+  filter:
+    brightness(0.92);
 
 }
 
@@ -432,6 +611,17 @@ button {
   opacity: 0.55;
 
   cursor: not-allowed;
+
+}
+
+
+body.goldmode .save-button {
+
+  background:
+    #123522;
+
+  border:
+    1px solid #315d40;
 
 }
 
@@ -462,6 +652,19 @@ button {
 }
 
 
+body.goldmode .team-title::before {
+
+  content:
+    "👥";
+
+  margin-right: 9px;
+
+  filter:
+    saturate(0.7);
+
+}
+
+
 .team-count {
 
   display: flex;
@@ -477,7 +680,8 @@ button {
 
   flex: 1;
 
-  border: 2px solid var(--border);
+  border:
+    2px solid var(--border);
 
   border-radius: 10px;
 
@@ -493,6 +697,9 @@ button {
 
   cursor: pointer;
 
+  transition:
+    0.18s ease;
+
 }
 
 
@@ -503,6 +710,16 @@ button {
   color: white;
 
   border-color: var(--blue);
+
+}
+
+
+body.goldmode .team-count button.active {
+
+  color: #111;
+
+  box-shadow:
+    0 0 14px rgba(220,174,56,0.28);
 
 }
 
@@ -520,6 +737,25 @@ button {
   margin-top: 10px;
 
   font-weight: bold;
+
+}
+
+
+body.goldmode .selected-count {
+
+  border:
+    1px solid #29402e;
+
+  color:
+    var(--gold-light);
+
+  background:
+    linear-gradient(
+      90deg,
+      #0d1510,
+      #121a13,
+      #0d1510
+    );
 
 }
 
@@ -542,6 +778,16 @@ button {
   font-weight: bold;
 
   margin: 5px 0 12px 4px;
+
+}
+
+
+body.goldmode .players-title::before {
+
+  content:
+    "👥";
+
+  margin-right: 9px;
 
 }
 
@@ -575,9 +821,15 @@ button {
 
   min-height: 54px;
 
-  border: 2px solid transparent;
+  border:
+    2px solid transparent;
 
   cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
 }
 
@@ -587,6 +839,25 @@ button {
   background: var(--green-light);
 
   border-color: var(--green-border);
+
+}
+
+
+body.goldmode .player.selected {
+
+  background:
+    linear-gradient(
+      90deg,
+      #17140e,
+      #211c10,
+      #17140e
+    );
+
+  border-color:
+    var(--gold);
+
+  box-shadow:
+    0 0 10px rgba(220,174,56,0.10);
 
 }
 
@@ -604,6 +875,14 @@ button {
   accent-color: var(--blue);
 
   flex-shrink: 0;
+
+}
+
+
+body.goldmode .player input {
+
+  accent-color:
+    var(--gold);
 
 }
 
@@ -629,7 +908,8 @@ button {
 
   min-width: 58px;
 
-  border: 2px solid var(--border);
+  border:
+    2px solid var(--border);
 
   border-radius: 10px;
 
@@ -677,6 +957,38 @@ button {
 }
 
 
+body.goldmode .goalkeeper-button {
+
+  border-color:
+    #4b4b4b;
+
+}
+
+
+body.goldmode .goalkeeper-button.status-t {
+
+  background:
+    #6f7d91;
+
+  border-color:
+    #8997a9;
+
+  color: white;
+
+}
+
+
+body.goldmode .goalkeeper-button.status-tplus {
+
+  color:
+    #111;
+
+  box-shadow:
+    0 0 10px rgba(220,174,56,0.18);
+
+}
+
+
 /* ==================================================
    TEAMS
    ================================================== */
@@ -692,9 +1004,20 @@ button {
 }
 
 
+body.goldmode .teams-title::before {
+
+  content:
+    "🏆";
+
+  margin-right: 9px;
+
+}
+
+
 .team-card {
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 14px;
 
@@ -703,6 +1026,17 @@ button {
   margin-bottom: 12px;
 
   background: var(--player);
+
+}
+
+
+body.goldmode .team-card {
+
+  border-color:
+    rgba(220,174,56,0.45);
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.28);
 
 }
 
@@ -724,11 +1058,27 @@ button {
 }
 
 
+body.goldmode .team-header {
+
+  color: #111;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a97917,
+      #dcae38,
+      #b7851e
+    );
+
+}
+
+
 .team-player {
 
   padding: 9px 14px;
 
-  border-bottom: 1px solid var(--border);
+  border-bottom:
+    1px solid var(--border);
 
   font-size: 16px;
 
@@ -788,6 +1138,14 @@ button {
 }
 
 
+body.goldmode .save-info.success {
+
+  color:
+    var(--gold-light);
+
+}
+
+
 /* ==================================================
    SPIELVERLAUF
    ================================================== */
@@ -814,7 +1172,8 @@ button {
 
 .history-item {
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 14px;
 
@@ -823,6 +1182,14 @@ button {
   margin-bottom: 10px;
 
   background: var(--player);
+
+}
+
+
+body.goldmode .history-item {
+
+  border-color:
+    rgba(220,174,56,0.35);
 
 }
 
@@ -860,7 +1227,8 @@ button {
 
 .history-header:hover {
 
-  filter: brightness(0.95);
+  filter:
+    brightness(0.95);
 
 }
 
@@ -923,11 +1291,20 @@ button {
 }
 
 
+body.goldmode .history-team-title {
+
+  color:
+    #111;
+
+}
+
+
 .history-player {
 
   padding: 8px 12px;
 
-  border-bottom: 1px solid var(--border);
+  border-bottom:
+    1px solid var(--border);
 
   font-size: 15px;
 
@@ -992,7 +1369,8 @@ button {
 
   justify-content: space-between;
 
-  border: 2px solid var(--border);
+  border:
+    2px solid var(--border);
 
   border-radius: 12px;
 
@@ -1015,16 +1393,30 @@ button {
 
 .theme-option:hover {
 
-  filter: brightness(0.96);
+  filter:
+    brightness(0.96);
 
 }
 
 
 .theme-option.active {
 
-  border-color: var(--blue);
+  border-color:
+    var(--blue);
 
-  background: var(--card);
+  background:
+    var(--card);
+
+}
+
+
+body.goldmode .theme-option.active {
+
+  border-color:
+    var(--gold);
+
+  box-shadow:
+    0 0 12px rgba(220,174,56,0.12);
 
 }
 
@@ -1054,6 +1446,49 @@ button {
   color: var(--blue);
 
   font-weight: bold;
+
+}
+
+
+body.goldmode .theme-check {
+
+  color:
+    var(--gold-light);
+
+}
+
+
+/* ==================================================
+   GOLD THEME OPTION PREVIEW
+   ================================================== */
+
+#themeGold {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b0c0d,
+      #17130a
+    );
+
+  color:
+    #f2f2f2;
+
+}
+
+
+#themeGold.active {
+
+  border-color:
+    var(--gold);
+
+}
+
+
+#themeGold .theme-icon {
+
+  color:
+    var(--gold-light);
 
 }
 
@@ -1139,7 +1574,7 @@ button {
 
   <div class="version">
 
-    Teamgenerator V0.7.0
+    Teamgenerator V0.7.1
 
   </div>
 
@@ -1147,7 +1582,7 @@ button {
 
 
 <!-- ==================================================
-     NORMALE NAVIGATION
+     HAUPTNAVIGATION
      ================================================== -->
 
 <div
@@ -1182,6 +1617,8 @@ button {
 <div id="seiteTeams">
 
 
+  <!-- STATUS -->
+
   <div class="card status-card">
 
     <button
@@ -1203,10 +1640,14 @@ button {
   </div>
 
 
+  <!-- TEAM STEUERUNG -->
+
   <div class="card team-controls">
 
     <div class="team-title">
+
       Anzahl Teams
+
     </div>
 
 
@@ -1258,10 +1699,14 @@ button {
   </div>
 
 
+  <!-- SPIELER -->
+
   <div class="card players-card">
 
     <div class="players-title">
+
       Spieler
+
     </div>
 
 
@@ -1271,7 +1716,9 @@ button {
     >
 
       <div class="no-teams">
+
         Bitte zuerst Spieler aktualisieren.
+
       </div>
 
     </div>
@@ -1279,17 +1726,23 @@ button {
   </div>
 
 
+  <!-- TEAMS -->
+
   <div class="card">
 
     <div class="teams-title">
+
       Teams
+
     </div>
 
 
     <div id="teamsErgebnis">
 
       <div class="no-teams">
+
         Noch keine Teams erstellt.
+
       </div>
 
     </div>
@@ -1301,7 +1754,9 @@ button {
       onclick="teamsSpeichern()"
       style="display:none"
     >
+
       💾 Teams speichern
+
     </button>
 
 
@@ -1311,6 +1766,7 @@ button {
     ></div>
 
   </div>
+
 
 </div>
 
@@ -1327,7 +1783,9 @@ button {
   <div class="card">
 
     <div class="teams-title">
+
       Spielverlauf
+
     </div>
 
 
@@ -1376,9 +1834,13 @@ button {
     <div class="options-section">
 
       <div class="options-section-title">
+
         Darstellung
+
       </div>
 
+
+      <!-- HELL -->
 
       <button
         id="themeHell"
@@ -1407,6 +1869,8 @@ button {
       </button>
 
 
+      <!-- DUNKEL -->
+
       <button
         id="themeDunkel"
         class="theme-option"
@@ -1433,6 +1897,35 @@ button {
 
       </button>
 
+
+      <!-- GOLD -->
+
+      <button
+        id="themeGold"
+        class="theme-option"
+        onclick="themeSetzen('gold')"
+      >
+
+        <span class="theme-option-left">
+
+          <span class="theme-icon">
+            🥇
+          </span>
+
+          <span>
+            Gold Style
+          </span>
+
+        </span>
+
+
+        <span
+          id="checkGold"
+          class="theme-check"
+        ></span>
+
+      </button>
+
     </div>
 
 
@@ -1440,7 +1933,9 @@ button {
       class="main-button"
       onclick="optionenZurueck()"
     >
+
       ← Zurück
+
     </button>
 
   </div>
@@ -1490,6 +1985,17 @@ document.addEventListener(
 
       document.body.classList.add(
         "darkmode"
+      );
+
+    }
+
+    else if (
+      gespeichertesTheme ===
+      "gold"
+    ) {
+
+      document.body.classList.add(
+        "goldmode"
       );
 
     }
@@ -1569,6 +2075,12 @@ function themeSetzen(
   theme
 ) {
 
+  document.body.classList.remove(
+    "darkmode",
+    "goldmode"
+  );
+
+
   if (
     theme ===
     "dunkel"
@@ -1586,12 +2098,24 @@ function themeSetzen(
 
   }
 
-  else {
+  else if (
+    theme ===
+    "gold"
+  ) {
 
-    document.body.classList.remove(
-      "darkmode"
+    document.body.classList.add(
+      "goldmode"
     );
 
+
+    localStorage.setItem(
+      "marnbach-theme",
+      "gold"
+    );
+
+  }
+
+  else {
 
     localStorage.setItem(
       "marnbach-theme",
@@ -1618,6 +2142,17 @@ function themeAnzeigeAktualisieren() {
     );
 
 
+  const gold =
+    document.body.classList.contains(
+      "goldmode"
+    );
+
+
+  const hell =
+    !dunkel &&
+    !gold;
+
+
   const hellButton =
     document.getElementById(
       "themeHell"
@@ -1627,6 +2162,12 @@ function themeAnzeigeAktualisieren() {
   const dunkelButton =
     document.getElementById(
       "themeDunkel"
+    );
+
+
+  const goldButton =
+    document.getElementById(
+      "themeGold"
     );
 
 
@@ -1642,9 +2183,16 @@ function themeAnzeigeAktualisieren() {
     );
 
 
+  const checkGold =
+    document.getElementById(
+      "checkGold"
+    );
+
+
   if (
     !hellButton ||
-    !dunkelButton
+    !dunkelButton ||
+    !goldButton
   ) {
 
     return;
@@ -1654,7 +2202,7 @@ function themeAnzeigeAktualisieren() {
 
   hellButton.classList.toggle(
     "active",
-    !dunkel
+    hell
   );
 
 
@@ -1664,14 +2212,26 @@ function themeAnzeigeAktualisieren() {
   );
 
 
+  goldButton.classList.toggle(
+    "active",
+    gold
+  );
+
+
   checkHell.textContent =
-    !dunkel
+    hell
       ? "✓"
       : "";
 
 
   checkDunkel.textContent =
     dunkel
+      ? "✓"
+      : "";
+
+
+  checkGold.textContent =
+    gold
       ? "✓"
       : "";
 
@@ -1968,7 +2528,7 @@ function spielerAnzeigen() {
 
       /* ================================================
          CHECKBOX
-         ================================================ */
+         ================================================= */
 
       const checkbox =
         document.createElement(
@@ -1990,7 +2550,12 @@ function spielerAnzeigen() {
 
       checkbox.addEventListener(
         "change",
-        function() {
+        function(
+          event
+        ) {
+
+          event.stopPropagation();
+
 
           zeile.classList.toggle(
             "selected",
@@ -2004,9 +2569,9 @@ function spielerAnzeigen() {
       );
 
 
-      /* ================================================
+      /* =================================================
          NAME
-         ================================================ */
+         ================================================= */
 
       const text =
         document.createElement(
@@ -2022,9 +2587,9 @@ function spielerAnzeigen() {
         name;
 
 
-      /* ================================================
+      /* =================================================
          TORWART BUTTON
-         ================================================ */
+         ================================================= */
 
       const torwartButton =
         document.createElement(
@@ -2145,9 +2710,9 @@ function spielerAnzeigen() {
       );
 
 
-      /* ================================================
+      /* =================================================
          KOMPLETTE ZEILE ANKLICKBAR
-         ================================================ */
+         ================================================= */
 
       zeile.addEventListener(
         "click",
