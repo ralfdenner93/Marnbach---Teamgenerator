@@ -670,7 +670,7 @@
 
     <div class="version">
 
-      Teamgenerator V0.5.8
+      Teamgenerator V0.5.9
 
     </div>
 
@@ -736,7 +736,7 @@
         class="status"
       >
 
-        Spieler werden geladen...
+        Bereit
 
       </div>
 
@@ -745,7 +745,6 @@
 
     <!-- ==================================================
          TEAM CONTROLS
-         JETZT VOR DER SPIELERLISTE
          ================================================== -->
 
     <div class="card team-controls">
@@ -835,7 +834,7 @@
 
         <div class="no-teams">
 
-          Spieler werden geladen...
+          Bitte zuerst Spieler aktualisieren.
 
         </div>
 
@@ -1352,11 +1351,7 @@
 
     element.textContent =
       anzahl +
-      (
-        anzahl === 1
-          ? " Spieler dabei"
-          : " Spieler dabei"
-      );
+      " Spieler dabei";
 
   }
 
@@ -1885,20 +1880,6 @@
     return div.innerHTML;
 
   }
-
-
-  /* ==================================================
-     START
-     ================================================== */
-
-  window.addEventListener(
-    "load",
-    function() {
-
-      spielerLaden();
-
-    }
-  );
 
 
 </script>
