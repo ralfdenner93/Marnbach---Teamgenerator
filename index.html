@@ -1074,138 +1074,173 @@
 
 
   /* ==================================================
-     SPIELER LADEN
-     ================================================== */
+   SPIELER LADEN
+   ================================================== */
 
-  function spielerLaden() {
+function spielerLaden() {
 
-
-    const status =
-      document.getElementById(
-        "status"
-      );
-
-
-    status.className =
-      "status";
+  const status =
+    document.getElementById(
+      "status"
+    );
 
 
-    status.textContent =
-      "Spieler werden geladen...";
+  status.className =
+    "status";
 
 
-    const alterScript =
-      document.getElementById(
-        "spielerScript"
-      );
+  status.textContent =
+    "Spieler werden geladen...";
 
 
-    if (
-      alterScript
+  const alterScript =
+    document.getElementById(
+      "spielerScript"
+    );
+
+
+  if (
+    alterScript
+  ) {
+
+    alterScript.remove();
+
+  }
+
+
+  /*
+   * Genau der funktionierende
+   * V0.6.0-Weg:
+   *
+   * eigener Callback +
+   * action=spieler
+   */
+
+  const callbackName =
+    "marnbachSpieler" +
+    Date.now();
+
+
+  window[
+    callbackName
+  ] =
+    function(
+      daten
     ) {
 
-      alterScript.remove();
+      try {
 
-    }
-
-
-    window.marnbachSpielerCallback =
-      function(
-        daten
-      ) {
-
-        try {
-
-          if (
-            !daten ||
-            !daten.success
-          ) {
-
-            throw new Error(
-              daten &&
-              daten.error
-                ? daten.error
-                : "Ungültige Antwort vom Master."
-            );
-
-          }
-
-
-          spieler =
-            Array.isArray(
-              daten.spieler
-            )
-              ? daten.spieler
-              : [];
-
-
-          spielerAnzeigen();
-
-
-          status.className =
-            "status success";
-
-
-          status.textContent =
-            spieler.length +
-            " Spieler geladen.";
-
-        }
-
-
-        catch (
-          err
+        if (
+          !daten ||
+          !daten.success
         ) {
 
-          status.className =
-            "status error";
-
-
-          status.textContent =
-            "Fehler beim Laden der Spieler.";
-
-          console.error(
-            err
+          throw new Error(
+            daten &&
+            daten.error
+              ? daten.error
+              : "Ungültige Antwort vom Master."
           );
 
         }
 
-      };
+
+        spieler =
+          Array.isArray(
+            daten.spieler
+          )
+            ? daten.spieler
+            : [];
 
 
-    const script =
-      document.createElement(
-        "script"
-      );
+        spielerAnzeigen();
 
 
-    script.id =
-      "spielerScript";
+        status.className =
+          "status success";
 
 
-    script.src =
-      MASTER_URL +
-      "?action=spielerPWA";
+        status.textContent =
+          spieler.length +
+          " Spieler geladen.";
+
+      }
 
 
-    script.onerror =
-      function() {
+      catch (
+        err
+      ) {
 
         status.className =
           "status error";
 
 
         status.textContent =
-          "Verbindung zur Master-Datei fehlgeschlagen.";
-
-      };
+          "Fehler beim Laden der Spieler.";
 
 
-    document.body.appendChild(
-      script
+        console.error(
+          err
+        );
+
+      }
+
+
+      finally {
+
+        delete window[
+          callbackName
+        ];
+
+      }
+
+    };
+
+
+  const script =
+    document.createElement(
+      "script"
     );
 
-  }
+
+  script.id =
+    "spielerScript";
+
+
+  script.src =
+    MASTER_URL +
+    "?action=spieler" +
+    "&prefix=" +
+    encodeURIComponent(
+      callbackName
+    ) +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror =
+    function() {
+
+      status.className =
+        "status error";
+
+
+      status.textContent =
+        "Verbindung zur Master-Datei fehlgeschlagen.";
+
+
+      delete window[
+        callbackName
+      ];
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
 
 
   /* ==================================================
