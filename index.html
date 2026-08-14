@@ -306,6 +306,92 @@
 
 
     /* ==================================================
+       TEAM AUSWAHL
+       ================================================== */
+
+    .team-controls {
+
+      position: sticky;
+
+      top: 8px;
+
+      z-index: 20;
+
+    }
+
+
+    .team-title {
+
+      font-size: 22px;
+
+      font-weight: bold;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .team-count {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .team-count button {
+
+      flex: 1;
+
+      border: 2px solid #ddd;
+
+      border-radius: 10px;
+
+      background: #f4f4f4;
+
+      padding: 13px;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+
+    .team-count button.active {
+
+      background: #2673e8;
+
+      color: white;
+
+      border-color: #2673e8;
+
+    }
+
+
+    .selected-count {
+
+      text-align: center;
+
+      background: #eeeeee;
+
+      border-radius: 10px;
+
+      padding: 11px;
+
+      margin-top: 10px;
+
+      font-weight: bold;
+
+    }
+
+
+    /* ==================================================
        SPIELERBEREICH
        ================================================== */
 
@@ -398,92 +484,6 @@
       font-size: 17px;
 
       line-height: 1.2;
-
-    }
-
-
-    /* ==================================================
-       TEAM AUSWAHL
-       ================================================== */
-
-    .team-controls {
-
-      position: sticky;
-
-      top: 8px;
-
-      z-index: 20;
-
-    }
-
-
-    .team-title {
-
-      font-size: 22px;
-
-      font-weight: bold;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .team-count {
-
-      display: flex;
-
-      gap: 8px;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .team-count button {
-
-      flex: 1;
-
-      border: 2px solid #ddd;
-
-      border-radius: 10px;
-
-      background: #f4f4f4;
-
-      padding: 13px;
-
-      font-size: 17px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-
-    .team-count button.active {
-
-      background: #2673e8;
-
-      color: white;
-
-      border-color: #2673e8;
-
-    }
-
-
-    .selected-count {
-
-      text-align: center;
-
-      background: #eeeeee;
-
-      border-radius: 10px;
-
-      padding: 11px;
-
-      margin-top: 10px;
-
-      font-weight: bold;
 
     }
 
@@ -670,7 +670,7 @@
 
     <div class="version">
 
-      Teamgenerator V0.5.7
+      Teamgenerator V0.5.8
 
     </div>
 
@@ -743,34 +743,10 @@
     </div>
 
 
-    <!-- SPIELER -->
-
-    <div class="card players-card">
-
-      <div class="players-title">
-
-        Spieler
-
-      </div>
-
-
-      <div
-        id="players"
-        class="players-scroll"
-      >
-
-        <div class="no-teams">
-
-          Spieler werden geladen...
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- TEAM CONTROLS -->
+    <!-- ==================================================
+         TEAM CONTROLS
+         JETZT VOR DER SPIELERLISTE
+         ================================================== -->
 
     <div class="card team-controls">
 
@@ -839,7 +815,38 @@
     </div>
 
 
-    <!-- ERGEBNISSE -->
+    <!-- ==================================================
+         SPIELER
+         ================================================== -->
+
+    <div class="card players-card">
+
+      <div class="players-title">
+
+        Spieler
+
+      </div>
+
+
+      <div
+        id="players"
+        class="players-scroll"
+      >
+
+        <div class="no-teams">
+
+          Spieler werden geladen...
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         ERGEBNISSE
+         ================================================== -->
 
     <div class="card">
 
@@ -1821,12 +1828,6 @@
 
   /* ==================================================
      TEAMS SPEICHERN
-     ==================================================
-     
-     V0.5.7:
-     Der Button ist bereits vorhanden.
-     Die eigentliche Master-Speicherung wird
-     im nächsten Schritt angebunden.
      ================================================== */
 
   function teamsSpeichern() {
