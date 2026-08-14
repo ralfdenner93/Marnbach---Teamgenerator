@@ -305,6 +305,15 @@
     }
 
 
+    .save-button:disabled {
+
+      background: #8dbda5;
+
+      cursor: not-allowed;
+
+    }
+
+
     /* ==================================================
        TEAM AUSWAHL
        ================================================== */
@@ -581,6 +590,24 @@
     }
 
 
+    .save-info.success {
+
+      color: #008a42;
+
+      font-weight: bold;
+
+    }
+
+
+    .save-info.error {
+
+      color: #d00000;
+
+      font-weight: bold;
+
+    }
+
+
     /* ==================================================
        VERLAUF
        ================================================== */
@@ -670,7 +697,7 @@
 
     <div class="version">
 
-      Teamgenerator V0.5.9
+      Teamgenerator V0.6.0
 
     </div>
 
@@ -869,7 +896,9 @@
       </div>
 
 
-      <!-- SPEICHERN -->
+      <!-- ==================================================
+           TEAMS SPEICHERN
+           ================================================== -->
 
       <button
         id="teamsSpeichern"
@@ -878,7 +907,7 @@
         style="display:none;"
       >
 
-        Teams speichern
+        💾 Teams speichern
 
       </button>
 
@@ -936,8 +965,8 @@
           "
         >
 
-          Die Speicherfunktion wird im nächsten
-          Schritt angebunden.
+          Die gespeicherten Teams werden
+          im nächsten Schritt hier geladen.
 
         </div>
 
@@ -1522,6 +1551,12 @@
             "";
 
 
+          document.getElementById(
+            "saveInfo"
+          ).className =
+            "save-info";
+
+
         }
 
 
@@ -1841,19 +1876,271 @@
     }
 
 
+    const button =
+      document.getElementById(
+        "teamsSpeichern"
+      );
+
+
     const info =
       document.getElementById(
         "saveInfo"
       );
 
 
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Teams werden gespeichert...";
+
+
+    info.className =
+      "save-info";
+
+
     info.textContent =
-      "Die Speicherfunktion wird als nächstes angebunden.";
+      "Verbindung zum Master wird hergestellt...";
 
 
-    alert(
-      "Die Teams sind bereit zum Speichern. Die Verbindung zum Spielverlauf bauen wir im nächsten Schritt ein."
+    const callbackName =
+      "marnbachSpeichernCallback_" +
+      Date.now();
+
+
+    let abgeschlossen =
+      false;
+
+
+    window[
+      callbackName
+    ] =
+      function(
+        daten
+      ) {
+
+
+        abgeschlossen =
+          true;
+
+
+        try {
+
+          if (
+            !daten ||
+            !daten.success
+          ) {
+
+            throw new Error(
+              daten &&
+              daten.error
+                ? daten.error
+                : "Die Teams konnten nicht gespeichert werden."
+            );
+
+          }
+
+
+          info.className =
+            "save-info success";
+
+
+          info.textContent =
+            "✓ Teams erfolgreich gespeichert.";
+
+
+          button.textContent =
+            "✓ Teams gespeichert";
+
+
+        }
+
+
+        catch (
+          err
+        ) {
+
+          info.className =
+            "save-info error";
+
+
+          info.textContent =
+            "Fehler: " +
+            err.message;
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "💾 Teams speichern";
+
+        }
+
+
+        finally {
+
+          cleanup();
+
+        }
+
+      };
+
+
+    const params =
+      new URLSearchParams();
+
+
+    params.set(
+      "action",
+      "teamsSpeichernPWA"
     );
+
+
+    params.set(
+      "teams",
+      JSON.stringify(
+        aktuelleTeams
+      )
+    );
+
+
+    params.set(
+      "prefix",
+      callbackName
+    );
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    script.id =
+      callbackName;
+
+
+    script.src =
+      MASTER_URL +
+      "?" +
+      params.toString();
+
+
+    script.onerror =
+      function() {
+
+
+        if (
+          abgeschlossen
+        ) {
+
+          return;
+
+        }
+
+
+        info.className =
+          "save-info error";
+
+
+        info.textContent =
+          "Verbindung zur Master-Datei fehlgeschlagen.";
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "💾 Teams speichern";
+
+
+        cleanup();
+
+      };
+
+
+    document.body.appendChild(
+      script
+    );
+
+
+    /*
+     * Falls nach einer gewissen Zeit
+     * überhaupt keine Antwort kommt.
+     */
+
+    setTimeout(
+      function() {
+
+
+        if (
+          abgeschlossen
+        ) {
+
+          return;
+
+        }
+
+
+        info.className =
+          "save-info error";
+
+
+        info.textContent =
+          "Keine Antwort vom Master erhalten.";
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "💾 Teams speichern";
+
+
+        cleanup();
+
+
+      },
+      15000
+    );
+
+
+    function cleanup() {
+
+
+      try {
+
+        delete window[
+          callbackName
+        ];
+
+      }
+
+      catch (
+        e
+      ) {}
+
+
+      const element =
+        document.getElementById(
+          callbackName
+        );
+
+
+      if (
+        element
+      ) {
+
+        element.remove();
+
+      }
+
+    }
 
   }
 
