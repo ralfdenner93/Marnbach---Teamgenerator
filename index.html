@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Marnbach Teamgenerator V0.5.5</title>
+  <title>Marnbach Teamgenerator V0.5.6</title>
 
 
   <style>
@@ -103,7 +103,7 @@
 
 
     /* ==============================
-       ALLGEMEINE KARTEN
+       KARTEN
        ============================== */
 
     .card {
@@ -119,17 +119,6 @@
       box-shadow:
         0 3px 12px
         rgba(0,0,0,0.10);
-
-    }
-
-
-    /* ==============================
-       SPIELER AKTUALISIEREN
-       ============================== */
-
-    .aktualisieren-card {
-
-      margin-bottom: 10px;
 
     }
 
@@ -204,7 +193,7 @@
 
 
     /* ==============================
-       FESTE STEUERBOX
+       STEUERUNG
        ============================== */
 
     .steuerung {
@@ -314,7 +303,7 @@
 
 
     /* ==============================
-       SPIELERBEREICH
+       SPIELER
        ============================== */
 
     .spieler-card {
@@ -332,10 +321,6 @@
 
     }
 
-
-    /*
-     * Nur dieser Bereich scrollt.
-     */
 
     .spieler-scroll {
 
@@ -359,10 +344,6 @@
 
     }
 
-
-    /* ==============================
-       SPIELER
-       ============================== */
 
     .spieler-liste {
 
@@ -461,7 +442,7 @@
 
 
     /* ==============================
-       TEAMERGEBNIS
+       TEAMS
        ============================== */
 
     #ergebnisBereich {
@@ -671,7 +652,7 @@
 
       <h1>⚽ Marnbach</h1>
 
-      <p>Teamgenerator V0.5.5</p>
+      <p>Teamgenerator V0.5.6</p>
 
     </div>
 
@@ -680,7 +661,7 @@
          SPIELER AKTUALISIEREN
          ============================ -->
 
-    <div class="card aktualisieren-card">
+    <div class="card">
 
       <button
         onclick="spielerLaden()"
@@ -700,7 +681,7 @@
 
 
     <!-- ============================
-         FESTE STEUERUNG
+         STEUERUNG
          ============================ -->
 
     <div
@@ -779,10 +760,6 @@
         Spieler
       </h2>
 
-
-      <!--
-        Eigener Scrollbereich
-      -->
 
       <div class="spieler-scroll">
 
@@ -1012,7 +989,6 @@
 
       spieler.forEach(
         function(s) {
-
 
           const zeile =
             document.createElement(
@@ -1544,31 +1520,70 @@
         "";
 
 
+      /*
+       * DER WICHTIGE FIX:
+       *
+       * Der Master liefert:
+       *
+       * {
+       *   A: [...],
+       *   B: [...],
+       *   C: [...],
+       *   D: [...]
+       * }
+       *
+       * und KEIN Array.
+       */
+
       const teams =
-        Array.isArray(
-          daten.teams
-        )
+        daten &&
+        daten.teams
           ? daten.teams
-          : [];
+          : {};
 
 
-      if (
-        teams.length === 0
-      ) {
-
-        container.innerHTML =
-          "<p>Der Master hat keine Teams zurückgegeben.</p>";
-
-        bereich.style.display =
-          "block";
-
-        return;
-
-      }
+      const teamBuchstaben =
+        [
+          "A",
+          "B",
+          "C",
+          "D"
+        ];
 
 
-      teams.forEach(
-        function(team, index) {
+      let vorhandeneTeams = 0;
+
+
+      teamBuchstaben.forEach(
+        function(teamName) {
+
+          if (
+            !Array.isArray(
+              teams[teamName]
+            )
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * Nur die tatsächlich
+           * gewünschten Teams anzeigen.
+           */
+
+          if (
+            vorhandeneTeams >=
+            anzahlTeams
+          ) {
+
+            return;
+
+          }
+
+
+          vorhandeneTeams++;
 
 
           const teamBox =
@@ -1591,39 +1606,8 @@
             "team-kopf";
 
 
-          let teamName =
-            "";
-
-
-          if (
-            typeof team === "object"
-          ) {
-
-            teamName =
-              team.name ||
-              team.team ||
-              team.teamName ||
-              (
-                "Team " +
-                String.fromCharCode(
-                  65 + index
-                )
-              );
-
-          }
-
-          else {
-
-            teamName =
-              "Team " +
-              String.fromCharCode(
-                65 + index
-              );
-
-          }
-
-
           kopf.textContent =
+            "Team " +
             teamName;
 
 
@@ -1637,56 +1621,7 @@
             "team-spieler";
 
 
-          let teamSpieler = [];
-
-
-          if (
-            Array.isArray(team)
-          ) {
-
-            teamSpieler =
-              team;
-
-          }
-
-          else if (
-            team &&
-            Array.isArray(
-              team.spieler
-            )
-          ) {
-
-            teamSpieler =
-              team.spieler;
-
-          }
-
-          else if (
-            team &&
-            Array.isArray(
-              team.players
-            )
-          ) {
-
-            teamSpieler =
-              team.players;
-
-          }
-
-          else if (
-            team &&
-            Array.isArray(
-              team.mitglieder
-            )
-          ) {
-
-            teamSpieler =
-              team.mitglieder;
-
-          }
-
-
-          teamSpieler.forEach(
+          teams[teamName].forEach(
             function(person) {
 
               const zeile =
@@ -1699,86 +1634,10 @@
                 "team-spieler-zeile";
 
 
-              let name =
-                "";
-
-
-              let notiz =
-                "";
-
-
-              if (
-                typeof person === "string"
-              ) {
-
-                name =
-                  person;
-
-              }
-
-              else if (
-                typeof person === "object"
-              ) {
-
-                name =
-                  person.name ||
-                  (
-                    (
-                      person.vorname ||
-                      ""
-                    ) +
-                    " " +
-                    (
-                      person.nachname ||
-                      ""
-                    )
-                  ).trim();
-
-
-                notiz =
-                  person.notiz ||
-                  "";
-
-              }
-
-
-              if (
-                !name
-              ) {
-
-                name =
-                  "Unbekannter Spieler";
-
-              }
-
-
               zeile.textContent =
-                name;
-
-
-              if (
-                notiz
-              ) {
-
-                const notizElement =
-                  document.createElement(
-                    "span"
-                  );
-
-
-                notizElement.className =
-                  "team-notiz";
-
-
-                notizElement.textContent =
-                  notiz;
-
-
-                zeile.appendChild(
-                  notizElement
+                String(
+                  person
                 );
-
-              }
 
 
               spielerBox.appendChild(
@@ -1790,25 +1649,25 @@
 
 
           if (
-            teamSpieler.length === 0
+            teams[teamName].length === 0
           ) {
 
-            const fallback =
+            const leer =
               document.createElement(
                 "div"
               );
 
 
-            fallback.className =
+            leer.className =
               "team-spieler-zeile";
 
 
-            fallback.textContent =
-              "Team wurde erstellt.";
+            leer.textContent =
+              "Keine Spieler";
 
 
             spielerBox.appendChild(
-              fallback
+              leer
             );
 
           }
@@ -1833,6 +1692,21 @@
 
 
       if (
+        vorhandeneTeams === 0
+      ) {
+
+        container.innerHTML =
+          "<p>Der Master hat keine Teams zurückgegeben.</p>";
+
+      }
+
+
+      /*
+       * Statistik anzeigen
+       */
+
+      if (
+        daten &&
         daten.statistik
       ) {
 
@@ -1840,24 +1714,69 @@
           "block";
 
 
+        const st =
+          daten.statistik;
+
+
+        let html =
+          "<strong>Teamstatistik</strong>";
+
+
         if (
-          typeof daten.statistik ===
-          "string"
+          Array.isArray(st.gesamt)
         ) {
 
-          statistik.textContent =
-            daten.statistik;
-
-        }
-
-        else {
-
-          statistik.textContent =
-            JSON.stringify(
-              daten.statistik
+          html +=
+            "<br><br>" +
+            "Gesamt: " +
+            st.gesamt.join(
+              " · "
             );
 
         }
+
+
+        if (
+          Array.isArray(st.lauf)
+        ) {
+
+          html +=
+            "<br>Lauf: " +
+            st.lauf.join(
+              " · "
+            );
+
+        }
+
+
+        if (
+          Array.isArray(st.spiel)
+        ) {
+
+          html +=
+            "<br>Spiel: " +
+            st.spiel.join(
+              " · "
+            );
+
+        }
+
+
+        if (
+          Array.isArray(st.durchsetzung)
+        ) {
+
+          html +=
+            "<br>Durchsetzung: " +
+            st.durchsetzung.join(
+              " · "
+            );
+
+        }
+
+
+        statistik.innerHTML =
+          html;
 
       }
 
@@ -1872,6 +1791,10 @@
       bereich.style.display =
         "block";
 
+
+      /*
+       * Zum Ergebnis scrollen.
+       */
 
       setTimeout(
         function() {
