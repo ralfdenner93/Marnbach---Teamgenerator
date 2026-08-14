@@ -697,7 +697,7 @@
 
     <div class="version">
 
-      Teamgenerator V0.6.0
+      Teamgenerator V0.6.1
 
     </div>
 
@@ -988,7 +988,7 @@
      ================================================== */
 
   const MASTER_URL =
-    "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQn5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
+    "https://script.google.com/macros/s/AKfycbyRxZCIWtFM1P7fO4DPqG9McQF1WrNQ5jtbDShDU4x4Mz1afHa7jRMq-oG3jz5qX8/exec";
 
 
   let spieler = [];
@@ -1480,6 +1480,42 @@
       );
 
 
+    /*
+     * Neue Mannschaften werden erstellt.
+     * Deshalb darf der aktuelle
+     * Speicherstatus nicht mehr gelten.
+     */
+
+    const saveButton =
+      document.getElementById(
+        "teamsSpeichern"
+      );
+
+
+    saveButton.style.display =
+      "none";
+
+
+    saveButton.disabled =
+      false;
+
+
+    saveButton.textContent =
+      "💾 Teams speichern";
+
+
+    document.getElementById(
+      "saveInfo"
+    ).textContent =
+      "";
+
+
+    document.getElementById(
+      "saveInfo"
+    ).className =
+      "save-info";
+
+
     button.disabled =
       true;
 
@@ -1535,14 +1571,22 @@
           );
 
 
-          const saveButton =
-            document.getElementById(
-              "teamsSpeichern"
-            );
-
+          /*
+           * Neue Teams wurden erfolgreich
+           * erstellt. Speichern wieder
+           * ermöglichen.
+           */
 
           saveButton.style.display =
             "block";
+
+
+          saveButton.disabled =
+            false;
+
+
+          saveButton.textContent =
+            "💾 Teams speichern";
 
 
           document.getElementById(
@@ -1950,6 +1994,16 @@
             "✓ Teams erfolgreich gespeichert.";
 
 
+          /*
+           * Nach erfolgreichem Speichern
+           * bleibt der Button bewusst
+           * deaktiviert.
+           */
+
+          button.disabled =
+            true;
+
+
           button.textContent =
             "✓ Teams gespeichert";
 
@@ -2103,7 +2157,6 @@
 
 
         cleanup();
-
 
       },
       15000
