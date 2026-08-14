@@ -12,24 +12,39 @@
 
 <title>Marnbach Teamgenerator</title>
 
+
 <style>
 
 * {
   box-sizing: border-box;
 }
 
+
 body {
+
   margin: 0;
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Arial,
+    sans-serif;
+
   background: #f2f2f2;
+
   color: #111;
+
 }
 
+
 .app {
+
   width: 100%;
+
   max-width: 600px;
+
   margin: 0 auto;
+
   padding: 10px;
+
 }
 
 
@@ -38,31 +53,55 @@ body {
    ================================================== */
 
 .header {
+
   background: white;
+
   border-radius: 18px;
+
   padding: 18px;
+
   margin-bottom: 10px;
+
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.10);
+
 }
+
 
 .logo {
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
+
   gap: 10px;
+
   font-size: 30px;
+
   font-weight: bold;
+
 }
+
 
 .ball {
+
   font-size: 30px;
+
 }
 
+
 .version {
+
   margin-top: 5px;
+
   font-size: 16px;
+
   color: #666;
+
 }
 
 
@@ -71,30 +110,54 @@ body {
    ================================================== */
 
 .navigation {
+
   display: flex;
+
   gap: 8px;
+
   background: white;
+
   padding: 8px;
+
   border-radius: 15px;
+
   margin-bottom: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
 }
+
 
 .nav-button {
+
   flex: 1;
+
   border: none;
+
   border-radius: 10px;
+
   padding: 12px;
+
   font-size: 16px;
+
   font-weight: bold;
+
   cursor: pointer;
+
   background: #eeeeee;
+
   color: #111;
+
 }
 
+
 .nav-button.active {
+
   background: #2673e8;
+
   color: white;
+
 }
 
 
@@ -103,11 +166,18 @@ body {
    ================================================== */
 
 .card {
+
   background: white;
+
   border-radius: 18px;
+
   padding: 16px;
+
   margin-bottom: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.10);
+
 }
 
 
@@ -116,23 +186,38 @@ body {
    ================================================== */
 
 .status-card {
+
   text-align: center;
+
 }
+
 
 .status {
+
   margin-top: 10px;
+
   font-size: 14px;
+
   color: #555;
+
 }
+
 
 .status.error {
+
   color: #d00000;
+
   font-weight: bold;
+
 }
 
+
 .status.success {
+
   color: #008a42;
+
   font-weight: bold;
+
 }
 
 
@@ -141,46 +226,91 @@ body {
    ================================================== */
 
 button {
-  font-family: Arial, sans-serif;
+
+  font-family:
+    Arial,
+    sans-serif;
+
 }
 
-.main-button,
-.save-button {
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  padding: 14px;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
 .main-button {
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 14px;
+
   background: #2673e8;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
 }
+
 
 .main-button:hover {
+
   background: #1763d7;
+
 }
+
 
 .main-button:disabled {
+
   background: #9dbbe9;
+
   cursor: not-allowed;
+
 }
+
 
 .save-button {
+
+  width: 100%;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 14px;
+
   background: #198754;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
   margin-top: 12px;
+
 }
+
 
 .save-button:hover {
+
   background: #147345;
+
 }
 
+
 .save-button:disabled {
+
   background: #8dbda5;
+
   cursor: not-allowed;
+
 }
 
 
@@ -189,47 +319,84 @@ button {
    ================================================== */
 
 .team-controls {
+
   position: sticky;
+
   top: 8px;
+
   z-index: 20;
+
 }
+
 
 .team-title {
+
   font-size: 22px;
+
   font-weight: bold;
+
   margin-bottom: 10px;
+
 }
+
 
 .team-count {
+
   display: flex;
+
   gap: 8px;
+
   margin-bottom: 10px;
+
 }
+
 
 .team-count button {
+
   flex: 1;
+
   border: 2px solid #ddd;
+
   border-radius: 10px;
+
   background: #f4f4f4;
+
   padding: 13px;
+
   font-size: 17px;
+
   font-weight: bold;
+
   cursor: pointer;
+
 }
+
 
 .team-count button.active {
+
   background: #2673e8;
+
   color: white;
+
   border-color: #2673e8;
+
 }
 
+
 .selected-count {
+
   text-align: center;
+
   background: #eeeeee;
+
   border-radius: 10px;
+
   padding: 11px;
+
   margin-top: 10px;
+
   font-weight: bold;
+
 }
 
 
@@ -238,51 +405,149 @@ button {
    ================================================== */
 
 .players-card {
+
   padding: 12px;
+
 }
+
 
 .players-title {
+
   font-size: 24px;
+
   font-weight: bold;
+
   margin: 5px 0 12px 4px;
+
 }
+
 
 .players-scroll {
+
   max-height: 58vh;
+
   overflow-y: auto;
+
   padding-right: 3px;
+
 }
+
 
 .player {
+
   display: flex;
+
   align-items: center;
-  gap: 14px;
+
+  gap: 10px;
+
   background: #f0f0f0;
+
   border-radius: 11px;
+
   padding: 10px 12px;
+
   margin-bottom: 6px;
+
   min-height: 54px;
-  cursor: pointer;
+
   border: 2px solid transparent;
+
 }
+
 
 .player.selected {
+
   background: #cfe8d5;
+
   border-color: #76b88a;
+
 }
+
 
 .player input {
+
   width: 25px;
+
   height: 25px;
+
   margin: 0;
+
   cursor: pointer;
+
   accent-color: #2673e8;
+
   flex-shrink: 0;
+
 }
 
+
 .player-name {
+
+  flex: 1;
+
   font-size: 17px;
+
   line-height: 1.2;
+
+}
+
+
+/* ==================================================
+   TORWART BUTTON
+   ================================================== */
+
+.goalkeeper-button {
+
+  width: 58px;
+
+  min-width: 58px;
+
+  border: 2px solid #d2d2d2;
+
+  border-radius: 10px;
+
+  padding: 8px 5px;
+
+  background: #ffffff;
+
+  color: #555;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+}
+
+
+.goalkeeper-button:hover {
+
+  background: #f4f4f4;
+
+}
+
+
+.goalkeeper-button.status-t {
+
+  background: #2673e8;
+
+  border-color: #2673e8;
+
+  color: white;
+
+}
+
+
+.goalkeeper-button.status-tplus {
+
+  background: #d6a21e;
+
+  border-color: #d6a21e;
+
+  color: white;
+
 }
 
 
@@ -291,42 +556,74 @@ button {
    ================================================== */
 
 .teams-title {
+
   font-size: 24px;
+
   font-weight: bold;
+
   margin: 5px 0 12px;
+
 }
+
 
 .team-card {
+
   border: 1px solid #d6d6d6;
+
   border-radius: 14px;
+
   overflow: hidden;
+
   margin-bottom: 12px;
+
   background: #f7f7f7;
+
 }
+
 
 .team-header {
+
   background: #2673e8;
+
   color: white;
+
   text-align: center;
+
   padding: 12px;
+
   font-size: 18px;
+
   font-weight: bold;
+
 }
+
 
 .team-player {
+
   padding: 9px 14px;
+
   border-bottom: 1px solid #ddd;
+
   font-size: 16px;
+
 }
+
 
 .team-player:last-child {
+
   border-bottom: none;
+
 }
 
+
 .no-teams {
+
   color: #555;
+
   text-align: center;
+
   padding: 15px 5px;
+
 }
 
 
@@ -335,20 +632,33 @@ button {
    ================================================== */
 
 .save-info {
+
   margin-top: 8px;
+
   text-align: center;
+
   font-size: 14px;
+
   color: #666;
+
 }
+
 
 .save-info.success {
+
   color: #008a42;
+
   font-weight: bold;
+
 }
 
+
 .save-info.error {
+
   color: #d00000;
+
   font-weight: bold;
+
 }
 
 
@@ -357,85 +667,152 @@ button {
    ================================================== */
 
 .history-empty {
+
   text-align: center;
+
   color: #555;
+
   padding: 30px 10px;
+
 }
+
 
 .history-icon {
+
   font-size: 42px;
+
   margin-bottom: 10px;
+
 }
+
 
 .history-item {
+
   border: 1px solid #d6d6d6;
+
   border-radius: 14px;
+
   overflow: hidden;
+
   margin-bottom: 10px;
+
   background: #f7f7f7;
+
 }
 
+
 .history-header {
+
   width: 100%;
+
   border: 0;
+
   border-radius: 0;
+
   padding: 14px;
+
   background: #eeeeee;
+
   color: #111;
+
   font-size: 16px;
+
   font-weight: bold;
+
   text-align: left;
+
   cursor: pointer;
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
 }
+
 
 .history-header:hover {
+
   background: #e7e7e7;
+
 }
+
 
 .history-arrow {
+
   font-size: 18px;
+
   margin-left: 10px;
+
 }
+
 
 .history-content {
+
   display: none;
+
   padding: 12px;
+
   background: white;
+
 }
 
-.history-item.open .history-content {
+
+.history-item.open
+.history-content {
+
   display: block;
+
 }
+
 
 .history-team {
+
   margin-bottom: 12px;
+
 }
+
 
 .history-team:last-child {
+
   margin-bottom: 0;
+
 }
+
 
 .history-team-title {
+
   background: #2673e8;
+
   color: white;
+
   border-radius: 9px;
+
   padding: 9px 12px;
+
   font-weight: bold;
+
   margin-bottom: 4px;
+
 }
+
 
 .history-player {
+
   padding: 8px 12px;
+
   border-bottom: 1px solid #ddd;
+
   font-size: 15px;
+
 }
 
+
 .history-player:last-child {
+
   border-bottom: 0;
+
 }
 
 
@@ -446,19 +823,39 @@ button {
 @media(max-width:480px) {
 
   .app {
+
     padding: 7px;
+
   }
+
 
   .logo {
+
     font-size: 27px;
+
   }
+
 
   .players-scroll {
+
     max-height: 56vh;
+
   }
 
+
   .player-name {
+
     font-size: 16px;
+
+  }
+
+
+  .goalkeeper-button {
+
+    width: 54px;
+
+    min-width: 54px;
+
   }
 
 }
@@ -470,6 +867,7 @@ button {
 
 <body>
 
+
 <div class="app">
 
 
@@ -480,12 +878,18 @@ button {
 <div class="header">
 
   <div class="logo">
+
     <span class="ball">⚽</span>
+
     <span>Marnbach</span>
+
   </div>
 
+
   <div class="version">
-    Teamgenerator V0.6.2
+
+    Teamgenerator V0.6.3
+
   </div>
 
 </div>
@@ -502,15 +906,20 @@ button {
     class="nav-button active"
     onclick="zeigeSeite('teams')"
   >
+
     ⚽ Teams
+
   </button>
+
 
   <button
     id="navVerlauf"
     class="nav-button"
     onclick="zeigeSeite('verlauf')"
   >
+
     📜 Spielverlauf
+
   </button>
 
 </div>
@@ -532,14 +941,19 @@ button {
       class="main-button"
       onclick="spielerLaden()"
     >
+
       Spieler aktualisieren
+
     </button>
+
 
     <div
       id="status"
       class="status"
     >
+
       Bereit
+
     </div>
 
   </div>
@@ -550,8 +964,11 @@ button {
   <div class="card team-controls">
 
     <div class="team-title">
+
       Anzahl Teams
+
     </div>
+
 
     <div class="team-count">
 
@@ -560,38 +977,52 @@ button {
         class="active"
         onclick="teamAnzahlWaehlen(2)"
       >
+
         2
+
       </button>
+
 
       <button
         id="team3"
         onclick="teamAnzahlWaehlen(3)"
       >
+
         3
+
       </button>
+
 
       <button
         id="team4"
         onclick="teamAnzahlWaehlen(4)"
       >
+
         4
+
       </button>
 
     </div>
+
 
     <button
       id="teamsErstellen"
       class="main-button"
       onclick="teamsErstellen()"
     >
+
       Teams erstellen
+
     </button>
+
 
     <div
       id="selectedCount"
       class="selected-count"
     >
+
       0 Spieler dabei
+
     </div>
 
   </div>
@@ -602,8 +1033,11 @@ button {
   <div class="card players-card">
 
     <div class="players-title">
+
       Spieler
+
     </div>
+
 
     <div
       id="players"
@@ -611,7 +1045,9 @@ button {
     >
 
       <div class="no-teams">
+
         Bitte zuerst Spieler aktualisieren.
+
       </div>
 
     </div>
@@ -624,13 +1060,20 @@ button {
   <div class="card">
 
     <div class="teams-title">
+
       Teams
+
     </div>
 
-    <div id="teamsErgebnis">
+
+    <div
+      id="teamsErgebnis"
+    >
 
       <div class="no-teams">
+
         Noch keine Teams erstellt.
+
       </div>
 
     </div>
@@ -642,7 +1085,9 @@ button {
       onclick="teamsSpeichern()"
       style="display:none"
     >
+
       💾 Teams speichern
+
     </button>
 
 
@@ -652,6 +1097,7 @@ button {
     ></div>
 
   </div>
+
 
 </div>
 
@@ -668,19 +1114,29 @@ button {
   <div class="card">
 
     <div class="teams-title">
+
       Spielverlauf
+
     </div>
 
-    <div id="spielverlauf">
+
+    <div
+      id="spielverlauf"
+    >
 
       <div class="history-empty">
 
         <div class="history-icon">
+
           📜
+
         </div>
 
+
         <div>
+
           Spielverlauf wird geladen...
+
         </div>
 
       </div>
@@ -726,15 +1182,18 @@ function zeigeSeite(
       "seiteTeams"
     );
 
+
   const verlaufSeite =
     document.getElementById(
       "seiteVerlauf"
     );
 
+
   const navTeams =
     document.getElementById(
       "navTeams"
     );
+
 
   const navVerlauf =
     document.getElementById(
@@ -800,6 +1259,7 @@ function spielerLaden() {
 
   status.className =
     "status";
+
 
   status.textContent =
     "Spieler werden geladen...";
@@ -870,8 +1330,10 @@ function spielerLaden() {
         status.className =
           "status error";
 
+
         status.textContent =
           "Fehler beim Laden der Spieler.";
+
 
         console.error(
           err
@@ -902,6 +1364,7 @@ function spielerLaden() {
 
       status.className =
         "status error";
+
 
       status.textContent =
         "Verbindung zur Master-Datei fehlgeschlagen.";
@@ -969,13 +1432,17 @@ function spielerAnzeigen() {
 
       const zeile =
         document.createElement(
-          "label"
+          "div"
         );
 
 
       zeile.className =
         "player";
 
+
+      /* ================================================
+         SPIELER CHECKBOX
+         ================================================ */
 
       const checkbox =
         document.createElement(
@@ -1004,11 +1471,16 @@ function spielerAnzeigen() {
             checkbox.checked
           );
 
+
           spielerZaehlen();
 
         }
       );
 
+
+      /* ================================================
+         NAME
+         ================================================ */
 
       const text =
         document.createElement(
@@ -1024,6 +1496,135 @@ function spielerAnzeigen() {
         name;
 
 
+      /* ================================================
+         TORWART BUTTON
+         ================================================ */
+
+      const torwartButton =
+        document.createElement(
+          "button"
+        );
+
+
+      torwartButton.type =
+        "button";
+
+
+      torwartButton.className =
+        "goalkeeper-button";
+
+
+      torwartButton.dataset.status =
+        "normal";
+
+
+      torwartButton.textContent =
+        "—";
+
+
+      torwartButton.addEventListener(
+        "click",
+        function(
+          event
+        ) {
+
+          /*
+           * Verhindert, dass der Klick
+           * gleichzeitig die Checkbox
+           * verändert.
+           */
+
+          event.preventDefault();
+
+          event.stopPropagation();
+
+
+          const aktuellerStatus =
+            torwartButton.dataset.status;
+
+
+          let neuerStatus;
+
+
+          if (
+            aktuellerStatus ===
+            "normal"
+          ) {
+
+            neuerStatus =
+              "T";
+
+          }
+
+          else if (
+            aktuellerStatus ===
+            "T"
+          ) {
+
+            neuerStatus =
+              "T+";
+
+          }
+
+          else {
+
+            neuerStatus =
+              "normal";
+
+          }
+
+
+          torwartButton.dataset.status =
+            neuerStatus;
+
+
+          torwartButton.classList.remove(
+            "status-t",
+            "status-tplus"
+          );
+
+
+          if (
+            neuerStatus ===
+            "T"
+          ) {
+
+            torwartButton.textContent =
+              "T";
+
+
+            torwartButton.classList.add(
+              "status-t"
+            );
+
+          }
+
+          else if (
+            neuerStatus ===
+            "T+"
+          ) {
+
+            torwartButton.textContent =
+              "T+";
+
+
+            torwartButton.classList.add(
+              "status-tplus"
+            );
+
+          }
+
+          else {
+
+            torwartButton.textContent =
+              "—";
+
+          }
+
+        }
+      );
+
+
       zeile.appendChild(
         checkbox
       );
@@ -1031,6 +1632,11 @@ function spielerAnzeigen() {
 
       zeile.appendChild(
         text
+      );
+
+
+      zeile.appendChild(
+        torwartButton
       );
 
 
@@ -1149,6 +1755,64 @@ function teamsErstellen() {
     );
 
 
+  /*
+   * ================================================
+   * TORWART-NOTIZEN SAMMELN
+   * ================================================
+   */
+
+  const notizen =
+    {};
+
+
+  checked.forEach(
+    function(
+      checkbox
+    ) {
+
+      const zeile =
+        checkbox.closest(
+          ".player"
+        );
+
+
+      const torwartButton =
+        zeile.querySelector(
+          ".goalkeeper-button"
+        );
+
+
+      if (
+        !torwartButton
+      ) {
+
+        return;
+
+      }
+
+
+      const status =
+        torwartButton.dataset.status;
+
+
+      if (
+        status === "T" ||
+        status === "T+"
+      ) {
+
+        notizen[
+          String(
+            checkbox.dataset.id
+          )
+        ] =
+          status;
+
+      }
+
+    }
+  );
+
+
   const button =
     document.getElementById(
       "teamsErstellen"
@@ -1174,22 +1838,24 @@ function teamsErstellen() {
 
 
   /*
-   * Neue Teams werden erstellt.
-   * Deshalb darf ein alter
-   * Speicherstatus nicht gelten.
+   * Neue Teams = neuer Speicherstatus.
    */
 
   saveButton.style.display =
     "none";
 
+
   saveButton.disabled =
     false;
+
 
   saveButton.textContent =
     "💾 Teams speichern";
 
+
   saveInfo.textContent =
     "";
+
 
   saveInfo.className =
     "save-info";
@@ -1197,6 +1863,7 @@ function teamsErstellen() {
 
   button.disabled =
     true;
+
 
   button.textContent =
     "Teams werden erstellt...";
@@ -1251,11 +1918,21 @@ function teamsErstellen() {
         saveButton.style.display =
           "block";
 
+
         saveButton.disabled =
           false;
 
+
         saveButton.textContent =
           "💾 Teams speichern";
+
+
+        saveInfo.textContent =
+          "";
+
+
+        saveInfo.className =
+          "save-info";
 
       }
 
@@ -1282,8 +1959,10 @@ function teamsErstellen() {
         button.disabled =
           false;
 
+
         button.textContent =
           "Teams erstellen";
+
 
         cleanup();
 
@@ -1321,7 +2000,7 @@ function teamsErstellen() {
   params.set(
     "notizen",
     JSON.stringify(
-      {}
+      notizen
     )
   );
 
@@ -1364,6 +2043,7 @@ function teamsErstellen() {
 
       button.disabled =
         false;
+
 
       button.textContent =
         "Teams erstellen";
@@ -1447,12 +2127,16 @@ function teamsAnzeigen(
   }
 
 
-  [
-    "A",
-    "B",
-    "C",
-    "D"
-  ].forEach(
+  const namen =
+    [
+      "A",
+      "B",
+      "C",
+      "D"
+    ];
+
+
+  namen.forEach(
     function(
       buchstabe
     ) {
@@ -1578,6 +2262,7 @@ function teamsSpeichern() {
 
   button.disabled =
     true;
+
 
   button.textContent =
     "Teams werden gespeichert...";
@@ -2311,6 +2996,7 @@ function escapeHtml(
 }
 
 </script>
+
 
 </body>
 
